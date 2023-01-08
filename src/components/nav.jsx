@@ -3,8 +3,13 @@ import { useState } from 'react'
 import Modal from 'react-modal';
 import Loginform from './loginform';
 import Signupform from './signupform';
+import { AuthContext } from '../context/auth.context';
+import { useContext } from 'react';
+
+
 
 const Nav = () => {
+    const { user, isLoggedIn, logOut } = useContext(AuthContext);
     function openModal() {
         setIsOpen(true);
     }
@@ -27,6 +32,9 @@ const Nav = () => {
                 </li>
                 <li onClick={openModal2}>
                     Log in
+                </li>
+                <li onClick={logOut}>
+                    log out
                 </li>
             </ul>
             <Modal

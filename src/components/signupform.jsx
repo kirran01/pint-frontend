@@ -26,7 +26,6 @@ const Signupform = () => {
                 console.log(err)
             })
     }
-
     return (
         <div>
             <h2>Sign up</h2>

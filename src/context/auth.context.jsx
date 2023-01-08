@@ -3,9 +3,9 @@ import axios from "axios";
 const AuthContext = createContext()
 
 function AuthProviderWrapper(props) {
-    const [isLoggedIn, setIsLoggedIn] = useState()
-    const [isLoading, setIsLoading] = useState()
-    const [user, setUser] = useState()
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
+    const [user, setUser] = useState(null)
 
     const authenticateUser = () => {
         const storedToken = localStorage.getItem('authToken')
@@ -18,6 +18,7 @@ function AuthProviderWrapper(props) {
                     setUser(user)
                 })
                 .catch(err => {
+                    console.log(err)
                     setIsLoggedIn(false)
                     setIsLoading(false)
                     setUser(null)
