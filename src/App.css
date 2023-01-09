@@ -12,3 +12,115 @@ padding: 0;
   margin:0px 5px 0px;
   cursor: pointer;
 }
+
+.login-component{
+text-align: center;
+}
+
+.login-form input{
+
+  background-color: rgb(250, 251, 252);
+  border-color: rgb(223, 225, 230);
+  color: rgb(9, 30, 66);
+  cursor: text;
+  border-radius: 5px;
+  border-width: 2px;
+  border-style: solid;
+  box-sizing: border-box;
+  font-size: 14px;
+  padding:10px 45px 10px 10px;
+  height: 36px;
+}
+
+.pintrest-logo{
+  display: flex;
+  justify-content: center;
+}
+
+
+.input-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.input-info h4{
+  margin:10px 5px 10px;
+  font-weight: lighter;
+}
+
+.input-info-outer{
+  display: flex;
+  justify-content: center;
+}
+
+#login-button{
+  padding:10px 85px 10px;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  background-color: #e60023;
+
+}
+
+#google-login-button{
+  margin: 5px 5px 5px;
+  padding:0px 5px 0px;
+  color: gray;
+  background-color: white;
+  border:0.25px solid gray;
+border-radius: 50px;
+}
+
+.google-login-button-content{
+  display: flex;
+  padding:0px;
+}
+
+.google-login-button-content h4{
+margin-left: 10px;
+margin-right: 25px;
+}
+
+.google-login-button-content span{
+  display: flex;
+  align-items: center;
+  margin: 10px 10px 10px;
+}
+
+#facebook-login-button{
+  margin: 5px 5px 5px;
+  border: none;
+  padding:0px 5px 0px;
+  color: white;
+  background-color: #1877f2;
+  border-radius: 50px;
+}
+
+.facebook-login-button-content{
+  display: flex;
+}
+.facebook-login-button-content span{
+  display: flex;
+  align-items: center;
+  margin: 10px 10px 10px;
+}
+
+.facebook-login-button-content h4{
+  margin-right: 15px;
+}
+
+.terms{
+  padding:0px 56px 0px;
+}
+
+.terms h6{
+  margin: 8px 10px 5px;
+}
+
+.end-terms h6{
+  margin:5px;
+}
+
+

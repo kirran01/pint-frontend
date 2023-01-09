@@ -23,6 +23,16 @@ const Nav = () => {
     function closeModal2() {
         setIsOpen2(false);
     }
+    const customStyles = {
+        content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            borderRadius:'30px',
+            transform: 'translate(-50%, -50%)',
+        },
+    }
     const [modalIsOpen2, setIsOpen2] = useState(false);
     return (
         <nav className='nav'>
@@ -31,19 +41,21 @@ const Nav = () => {
                     Sign Up
                 </li>
                 <li onClick={openModal2}>
-                    Log in
+                    Log In
                 </li>
                 <li onClick={logOut}>
-                    log out
+                    Log Out
                 </li>
             </ul>
             <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
+                style={customStyles}
             >
                 <Signupform />
             </Modal>
             <Modal
+                style={customStyles}
                 isOpen={modalIsOpen2}
                 onRequestClose={closeModal2}
             >
