@@ -46,7 +46,7 @@ const Loginform = () => {
                 <h5 style={{margin:'0px 0px 15px'}}>Forgot your password?</h5>
                 </div>
                 </div>
-                <button id='login-button'>Log In</button>
+                <button id='login-button'>Continue</button>
                 <h4 style={{ margin: '5px' }}>OR</h4>
                 <button id='facebook-login-button'>
                     <div className='facebook-login-button-content'>

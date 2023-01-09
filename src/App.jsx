@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Nav from './components/nav'
 import Home from './pages/home'
+import Createpost from './pages/createpost'
 import './App.css'
 
 
@@ -11,7 +12,8 @@ function App() {
     <div className="App">
       <Nav />
       <Routes>
-       <Route path='/' element={<Home/>}/>
+        <Route path='/create-post' element={<Createpost />} />
+        <Route path='/' element={<Home />} />
       </Routes>
     </div>
   )

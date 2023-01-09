@@ -123,4 +123,6 @@ margin-right: 25px;
   margin:5px;
 }
 
-
+.post-img img{
+  height:300px;
+}
