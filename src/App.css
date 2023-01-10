@@ -149,6 +149,10 @@ background-color: white;
 
 .upload-post-container{
   text-align: center;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .upload-post-icon-container{
@@ -165,11 +169,22 @@ background-color: white;
   border-radius:10px;
   box-sizing: border-box;
   padding:10px 10px 10px;
+  width:80%;
+
 }
 
 .create-post-form-button{
+margin: 10px;
 padding-left: 1em;
 }
+.create-post-form-button button{
+  padding: 10px 85px 10px;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background-color: #e60023;
+  }
 
 
 .create-post-form input{
@@ -192,3 +207,14 @@ padding-left: 1em;
 .upload-post-container{
 margin: 10px;
 }
+
+.upload-post-container button{
+  border: none;
+  margin: 10px 5px 5px;
+  padding: 10px 100px 10px;
+  background-color:#e9e9e9;
+  border-radius: 50px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
