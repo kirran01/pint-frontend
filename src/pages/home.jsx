@@ -27,7 +27,6 @@ const Home = () => {
                         return (
                             <>
                             <Post post={post} allPosts={allPosts} setAllPosts={setAllPosts} />
-                           
                             </>
                         )
                     })
