@@ -4,8 +4,7 @@ import { useParams } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 
 const Postpage = () => {
-    const { postId } = useParams();
-    
+    const { id } = useParams();
     return (
         <div>
             <h1>postpage</h1>
