@@ -20,7 +20,7 @@ const Signupform = () => {
             username: signUpInput.signUpName
         })
             .then(createdUser => {
-                console.log(createdUser)
+                console.log(createdUser.data)
             })
             .catch(err => {
                 console.log(err)

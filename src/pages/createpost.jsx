@@ -28,7 +28,8 @@ const Createpost = () => {
             }
         })
             .then(submittedPost => {
-                console.log(submittedPost, "<--submitted post")
+                console.log(submittedPost, "<--created new post")
+                //set state
             })
             .catch(err => {
                 console.log(err, "<--err")

@@ -1,14 +1,35 @@
 import React from 'react';
 import Post from '../components/post';
+import axios from 'axios';
+import { useEffect, useState, useContext } from 'react';
+import { AuthContext } from '../context/auth.context';
+import Masonry from 'react-masonry-css'
 
 const Home = () => {
+    const { user, isLoggedIn, logOut } = useContext(AuthContext)
+    const [allPosts, setAllPosts] = useState([])
+    useEffect(() => {
+        axios.get("http://localhost:3000/posts/all")
+            .then(allPosts => {
+                console.log(allPosts.data)
+                setAllPosts(allPosts.data)
+            })
+            .catch(err => {
+                console.log("err", err)
+            })
+    }, [])
     return (
         <div className='home-page'>
-            <Post />
-            <Post />
-            <Post />
-            <Post />
-            <Post />
+            <div className='home-posts'>
+                
+                {
+                    allPosts.map(post => {
+                        return (
+                            <Post post={post} allPosts={allPosts} setAllPosts={setAllPosts} />
+                        )
+                    })
+                }
+            </div>
         </div>
     );
 }

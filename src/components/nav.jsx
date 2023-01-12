@@ -5,6 +5,7 @@ import Loginform from './loginform';
 import Signupform from './signupform';
 import { AuthContext } from '../context/auth.context';
 import { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
@@ -29,7 +30,7 @@ const Nav = () => {
             left: '50%',
             right: 'auto',
             bottom: 'auto',
-            borderRadius:'30px',
+            borderRadius: '30px',
             transform: 'translate(-50%, -50%)',
         },
     }
@@ -46,6 +47,12 @@ const Nav = () => {
                 <li onClick={logOut}>
                     Log Out
                 </li>
+                <Link to="/">
+                    Home
+                </Link>
+                <Link to="/create-post">
+                    Create
+                </Link>
             </ul>
             <Modal
                 isOpen={modalIsOpen}
