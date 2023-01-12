@@ -218,3 +218,15 @@ margin: 10px;
   cursor: pointer;
 }
 
+.home-posts{
+columns: 5 200px;
+}
+
+.home-posts img{
+ max-width: 100%;
+ border-radius: 20px;
+}
+
+.home-posts img:hover{
+  opacity: 20%;
+}

@@ -25,7 +25,10 @@ const Home = () => {
                 {
                     allPosts.map(post => {
                         return (
+                            <>
                             <Post post={post} allPosts={allPosts} setAllPosts={setAllPosts} />
+                           
+                            </>
                         )
                     })
                 }
