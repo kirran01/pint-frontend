@@ -7,7 +7,7 @@ const Postpage = () => {
     const { id } = useParams();
     return (
         <div>
-            <h1>postpage</h1>
+            <h1>postpage</h1> 
         </div>
     );
 }
