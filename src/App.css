@@ -2,6 +2,29 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.nav{
+  display: flex;
+  align-items: center;
+}
+
+.nav input{
+  border-radius: 32px;
+  border:none;
+  background-color: #e9e9e9;
+  width: 100%;
+  height: 3em;
+  font-size: 15px;
+  padding-left: 25px;
+}
+
+#searchbarId.searchbar{
+  background-image: url('../public/img/magnify.png') ;
+  background-position: left;
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  margin: 5px 5px 5px;
+  padding-left: 20px;
+}
 .nav ul{
 display:flex;
 list-style: none;
@@ -11,6 +34,7 @@ padding: 0;
 .nav ul li{
   margin:0px 5px 0px;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .login-component{
@@ -18,7 +42,6 @@ text-align: center;
 }
 
 .login-form input{
-
   background-color: rgb(250, 251, 252);
   border-color: rgb(223, 225, 230);
   color: rgb(9, 30, 66);
@@ -61,7 +84,6 @@ text-align: center;
   border-radius: 10px;
   border: none;
   background-color: #e60023;
-
 }
 
 #google-login-button{
@@ -177,6 +199,7 @@ background-color: white;
 margin: 10px;
 padding-left: 1em;
 }
+
 .create-post-form-button button{
   padding: 10px 85px 10px;
   color: white;
@@ -184,7 +207,7 @@ padding-left: 1em;
   border: none;
   cursor: pointer;
   background-color: #e60023;
-  }
+}
 
 
 .create-post-form input{
@@ -219,7 +242,8 @@ margin: 10px;
 }
 
 .home-posts{
-columns: 7 200px;
+ margin:20px 20px 0px;
+ columns: 7 200px;
 }
 
 .home-posts img{
