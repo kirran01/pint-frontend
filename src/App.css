@@ -5,6 +5,11 @@
 .nav{
   display: flex;
   align-items: center;
+  background-color: white;
+  z-index: 1;
+  position: fixed;
+  top:0;
+  width: 100%;
 }
 
 .nav input{
@@ -18,17 +23,14 @@
 }
 
 #searchbarId.searchbar{
-  background-image: url('../public/img/magnify.png') ;
-  background-position: left;
-  background-size: 20px 20px;
-  background-repeat: no-repeat;
   margin: 5px 5px 5px;
-  padding-left: 20px;
+  padding-left: 40px;
 }
 .nav ul{
 display:flex;
 list-style: none;
 padding: 0;
+align-items: center;
 }
 
 .nav ul li{
@@ -242,8 +244,19 @@ margin: 10px;
 }
 
 .home-posts{
- margin:20px 20px 0px;
+ margin:90px 20px 0px;
  columns: 7 200px;
+}
+
+.home-posts h6{
+  margin: 15px 20px 15px;
+}
+
+.home-posts a{
+  text-decoration: none;
+  color: black;
+  font-size: 25px;
+  font-weight: lighter;
 }
 
 .home-posts img{
@@ -252,5 +265,55 @@ margin: 10px;
 }
 
 .home-posts img:hover{
-  opacity: 20%;
+filter: brightness(50%);
+}
+
+.nav-icons{
+  display: flex;
+  margin: 5px 5px 5px 50px;
+}
+.nav-icon{
+  color:#767676;
+  margin:5px 10px 5px;
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.pintrest-logo{
+  margin: 10px;
+}
+
+.searchbar-icon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:100%;
+  position: absolute;
+  margin-left: 20px;
+  z-index: 2;
+}
+
+.searchbar-container-outer{
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.searchbar-container-inner{
+  position: relative;
+  width: 100%;
+}
+
+.home-button{
+  background-color: black;
+  border-radius: 28px;
+  height: 45px;
+  width: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home-button :nth-child(1){
+  color: white;
+  text-decoration: none;
 }

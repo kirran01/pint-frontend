@@ -42,9 +42,16 @@ const Nav = () => {
     return (
         <nav className='nav'>
             <div className='pintrest-logo'>
-                <img style={{ height: '32px' }} src="../../public/img/pint.png" alt="img" />
+                <Link to="/">
+                    <img style={{ height: '32px' }} src="../../public/img/pint.png" alt="img" />
+                </Link>
             </div>
             <ul>
+                <div className='home-button'>
+                    <Link to="/">
+                        Home
+                    </Link>
+                </div>
                 <li onClick={openModal}>
                     Sign Up
                 </li>
@@ -54,21 +61,24 @@ const Nav = () => {
                 <li onClick={logOut}>
                     Log Out
                 </li>
-                <Link to="/">
-                    Home
-                </Link>
-                <Link to="/create-post">
+
+                <Link style={{color:"black",textDecoration:"none"}} to="/create-post">
                     Create
                 </Link>
+              
             </ul>
-            <div className='searchbar-container'>
-                <span className='searchbar-icon'><img style={{height:'20px'}} src="../../public/img/magnify.png" alt="" /></span>
+            <div className='searchbar-container-outer'>
+                <span className='searchbar-icon'><img style={{ height: '20px' }} src="../../public/img/magnify.png" alt="" /></span>
+                <div className='searchbar-container-inner'>
+                    <input id="searchbarId" className='searchbar' type="text" placeholder='Search' />
+                </div>
             </div>
-            <input id="searchbarId" className='searchbar' type="text" placeholder='Search' />
-            <NotificationsIcon />
-            <ChatBubbleIcon />
-            <AccountCircleIcon />
-            <ExpandMoreIcon />
+            <div className='nav-icons'>
+                <NotificationsIcon className="nav-icon" />
+                <ChatBubbleIcon className="nav-icon" />
+                <AccountCircleIcon className="nav-icon" />
+                <ExpandMoreIcon className="nav-icon" />
+            </div>
             <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
