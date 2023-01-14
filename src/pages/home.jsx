@@ -21,12 +21,11 @@ const Home = () => {
     return (
         <div className='home-page'>
             <div className='home-posts'>
-                
                 {
                     allPosts.map(post => {
                         return (
                             <>
-                            <Post post={post} allPosts={allPosts} setAllPosts={setAllPosts} />
+                            <Post key={post._id} post={post} allPosts={allPosts} setAllPosts={setAllPosts} />
                             </>
                         )
                     })

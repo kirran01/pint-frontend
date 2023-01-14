@@ -317,3 +317,15 @@ filter: brightness(50%);
   color: white;
   text-decoration: none;
 }
+
+.post-page{
+  margin:75px 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.post-page-content-card{
+  display: flex;
+}
