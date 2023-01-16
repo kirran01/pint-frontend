@@ -415,3 +415,13 @@ padding: 12px 12px 12px;
   border-radius: 20px;
   border:none;
 }
+.edit-comment-buttons buttons{
+  display: flex;
+  align-items: flex-start;
+  border:none;
+  border-radius: 10px;
+}
+
+.edit-comment-buttons{
+  width: 150px;
+}
