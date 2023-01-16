@@ -94,13 +94,13 @@ const Postpage = () => {
                                                 <div style={{display:'flex', alignItems:'flex-start',marginTop:'2px'}}>
                                                 
                                                 <AccountCircleIcon/>
-                                                <h5 style={{margin:'0'}}>{post.comments[0].owner.username}</h5>
+                                                <h5 style={{margin:'2px'}}>{post.comments[0].owner.username}</h5>
                                                 </div>
-                                                <p style={{ fontSize: '15px', fontWeight: 'lighter',margin:'0px 5px 5px' }}>{comment.comment}</p>
+                                                <p style={{ fontSize: '15px', fontWeight: 'lighter',margin:'2px 5px 5px' }}>{comment.comment}</p>
                                             </div>
                                             <div style={{ display: 'flex',marginLeft:'12px' }}>
-                                                <h5 style={{margin:'0px 10px 25px'}}>{new Date(post.comments[0].day).toDateString().substring(3)}</h5>
-                                                <h5 style={{margin:'0px 10px 25px'}}>reply</h5>
+                                                <h5 style={{margin:'3px 10px 25px'}}>{new Date(post.comments[0].day).toDateString().substring(3)}</h5>
+                                                <h5 style={{margin:'3px 10px 25px'}}>reply</h5>
                                                 <FavoriteBorderIcon />
                                                 <MoreHorizIcon />
                                             </div>
