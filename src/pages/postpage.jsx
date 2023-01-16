@@ -3,19 +3,17 @@ import axios from 'axios';
 import { useState, useContext, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
-import { PostAdd } from '@mui/icons-material';
 import UploadIcon from '@mui/icons-material/Upload';
 import LinkIcon from '@mui/icons-material/Link';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import { padding } from '@mui/system';
+import Comment from '../components/comment';
 
 const Postpage = () => {
     const { id } = useParams();
     const [openEdit, setOpenEdit] = useState(false)
-    const [isOpen, setIsOpen] = useState(true);
     const editComment = () => {
         console.log('editcomment')
     }
@@ -26,9 +24,6 @@ const Postpage = () => {
         else {
             setOpenEdit(false)
         }
-    }
-    const closeEditBox = () => {
-        setOpenEdit(false)
     }
     const [post, setPost] = useState(null)
     const { storeToken, user, authenticateUser } = useContext(AuthContext)
@@ -102,27 +97,7 @@ const Postpage = () => {
                             {post &&
                                 post.comments.map(comment => {
                                     return (<>
-                                        <div>
-                                            <div style={{ display: 'flex' }}>
-                                                {/* <img src="" alt="img" /> */}
-                                                <div style={{ display: 'flex', alignItems: 'flex-start', marginTop: '2px' }}>
-
-                                                    <AccountCircleIcon />
-                                                    <h5 style={{ margin: '2px' }}>{post.comments[0].owner.username}</h5>
-                                                </div>
-                                                <p style={{ fontSize: '15px', fontWeight: 'lighter', margin: '2px 5px 5px' }}>{comment.comment}</p>
-                                            </div>
-                                            <div style={{ display: 'flex', marginLeft: '12px' }}>
-                                                <h5 style={{ margin: '3px 10px 25px' }}>{new Date(post.comments[0].day).toDateString().substring(3)}</h5>
-                                                <h5 style={{ margin: '3px 10px 25px' }}>reply</h5>
-                                                <FavoriteBorderIcon />
-                                                <MoreHorizIcon onClick={openEditBox} />
-                                                {openEdit && <div className='edit-comment-buttons' style={{ display: 'flex', padding: '10px', border: '1px solid black', flexDirection: 'column' }}>
-                                                    <button onClick={editComment}><p style={{ margin: '0px', textAlign: 'left', margin: '10px' }}>Edit</p></button>
-                                                    <button><p style={{ margin: '0px', textAlign: 'left', margin: '10px' }}>Delete</p></button>
-                                                </div>}
-                                            </div>
-                                        </div>
+                                        <Comment post={post} comment={comment}/>
                                     </>)
                                 })}
                         </div>
