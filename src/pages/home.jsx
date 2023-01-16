@@ -3,7 +3,6 @@ import Post from '../components/post';
 import axios from 'axios';
 import { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
-import Masonry from 'react-masonry-css'
 
 const Home = () => {
     const { user, isLoggedIn, logOut } = useContext(AuthContext)
@@ -11,7 +10,6 @@ const Home = () => {
     useEffect(() => {
         axios.get("http://localhost:3000/posts/all")
             .then(allPosts => {
-                console.log(allPosts.data)
                 setAllPosts(allPosts.data)
             })
             .catch(err => {
