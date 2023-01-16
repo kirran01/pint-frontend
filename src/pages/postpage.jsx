@@ -16,9 +16,6 @@ const Postpage = () => {
     const [post, setPost] = useState(null)
     const { storeToken, user, authenticateUser } = useContext(AuthContext)
     const [commentInput, setCommentInput] = useState('')
-    const [commentDate, setCommentDate] = useState(null)
-    // { post && console.log(post.comments[0].owner.username, "comms") }
-
     const handleCommentInput = (e) => {
         setCommentInput(e.target.value)
     }

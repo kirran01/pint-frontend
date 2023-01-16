@@ -62,10 +62,10 @@ const Nav = () => {
                     Log Out
                 </li>
 
-                <Link style={{color:"black",textDecoration:"none"}} to="/create-post">
+                <Link style={{ color: "black", textDecoration: "none" }} to="/create-post">
                     Create
                 </Link>
-              
+
             </ul>
             <div className='searchbar-container-outer'>
                 <span className='searchbar-icon'><img style={{ height: '20px' }} src="../../public/img/magnify.png" alt="" /></span>
@@ -76,7 +76,9 @@ const Nav = () => {
             <div className='nav-icons'>
                 <NotificationsIcon className="nav-icon" />
                 <ChatBubbleIcon className="nav-icon" />
-                <AccountCircleIcon className="nav-icon" />
+                <Link to='/profile'>
+                    <AccountCircleIcon className="nav-icon" />
+                </Link>
                 <ExpandMoreIcon className="nav-icon" />
             </div>
             <Modal

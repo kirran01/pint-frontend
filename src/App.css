@@ -401,3 +401,17 @@ color: white;
 background-color:#e60023;
 padding: 12px 12px 12px;
 }
+
+.profile-page{
+  margin-top:80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-page button{
+  padding: 15px 15px 15px;
+  border-radius: 20px;
+  border:none;
+}
