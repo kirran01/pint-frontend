@@ -22,9 +22,12 @@ function App() {
         console.log("err", err)
       })
   }, [])
+  const updatePosts=(updatedPosts)=>{
+    setFilteredPosts(updatedPosts)
+  }
   return (
     <div className="App">
-      <Nav allPosts={allPosts} setAllPosts={setAllPosts} filteredPosts={filteredPosts} setFilteredPosts={setFilteredPosts} />
+      <Nav allPosts={allPosts} setAllPosts={setAllPosts} filteredPosts={filteredPosts} setFilteredPosts={setFilteredPosts} updatePosts={updatePosts} />
       <Routes>
         <Route path='/create-post' element={<Createpost />} />
         <Route path='/' element={<Home allPosts={allPosts} setAllPosts={setAllPosts} filteredPosts={filteredPosts} />} />

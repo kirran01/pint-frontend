@@ -14,7 +14,7 @@ import Searchbar from './searchbar';
 
 
 
-const Nav = ({ allPosts, setAllPosts, updatePostList }) => {
+const Nav = ({ allPosts, setAllPosts, updatePosts }) => {
     const { user, isLoggedIn, logOut } = useContext(AuthContext);
     function openModal() {
         setIsOpen(true);
@@ -68,7 +68,7 @@ const Nav = ({ allPosts, setAllPosts, updatePostList }) => {
                 </Link>
 
             </ul>
-            <Searchbar allPosts={allPosts} setAllPosts={setAllPosts} updatePostList={updatePostList} />
+            <Searchbar allPosts={allPosts} setAllPosts={setAllPosts} updatePosts={updatePosts} />
             <div className='nav-icons'>
                 <NotificationsIcon className="nav-icon" />
                 <ChatBubbleIcon className="nav-icon" />

@@ -1,13 +1,13 @@
 import React from 'react';
 
-const Searchbar = ({ allPosts, setAllPosts, filteredPosts, setFilteredPosts }) => {
+const Searchbar = ({ allPosts, setAllPosts, filteredPosts, setFilteredPosts, updatePosts }) => {
     const filterResults = (e) => {
         const newPostList = allPosts.filter((post => {
             return post.title
                 .toLowerCase()
                 .includes(e.target.value.toLowerCase())
         }))
-        setAllPosts(newPostList)
+        updatePosts(newPostList)
     }
     return (
         <div className='searchbar-container-outer'>

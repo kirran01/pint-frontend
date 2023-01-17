@@ -10,7 +10,7 @@ const Home = ({ allPosts, filteredPosts, setAllPosts }) => {
         <div className='home-page'>
             <div className='home-posts'>
                 {
-                    allPosts.map(post => {
+                    filteredPosts.map(post => {
                         return (
                             <>
                                 <Post key={post._id} post={post} allPosts={allPosts} setAllPosts={setAllPosts} />
