@@ -13,18 +13,6 @@ import Comment from '../components/comment';
 
 const Postpage = () => {
     const { id } = useParams();
-    const [openEdit, setOpenEdit] = useState(false)
-    const editComment = () => {
-        console.log('editcomment')
-    }
-    const openEditBox = () => {
-        if (!openEdit) {
-            setOpenEdit(true)
-        }
-        else {
-            setOpenEdit(false)
-        }
-    }
     const [post, setPost] = useState(null)
     const { storeToken, user, authenticateUser } = useContext(AuthContext)
     const [commentInput, setCommentInput] = useState('')
@@ -52,8 +40,9 @@ const Postpage = () => {
                 }
             })
             .then(res => {
-                console.log(res.data)
                 setPost(res.data)
+                setCommentInput('')
+                console.log(post)
             })
             .catch(err => {
                 console.log(err)
@@ -85,7 +74,7 @@ const Postpage = () => {
                     </div>
                     <div className='post-page-content-info'>
                         {post && <p style={{ fontSize: '35px', marginBottom: '0px' }}>{post.title}</p>}
-                        {post && <p style={{}}>{post.description}</p>}
+                        {post && <p>{post.description}</p>}
                     </div>
                     <div className='post-page-content-profile'></div>
                     <div className='post-page-content-comments'>
@@ -97,7 +86,7 @@ const Postpage = () => {
                             {post &&
                                 post.comments.map(comment => {
                                     return (<>
-                                        <Comment post={post} comment={comment}/>
+                                        <Comment setPost={setPost} post={post} comment={comment} />
                                     </>)
                                 })}
                         </div>

@@ -415,13 +415,18 @@ padding: 12px 12px 12px;
   border-radius: 20px;
   border:none;
 }
-.edit-comment-buttons buttons{
+.edit-comment-buttons button{
   display: flex;
   align-items: flex-start;
   border:none;
+  margin: 5px;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .edit-comment-buttons{
   width: 150px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
