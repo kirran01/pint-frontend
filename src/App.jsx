@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
+import axios from 'axios'
 import Nav from './components/nav'
 import Home from './pages/home'
 import Profile from './pages/profile'
@@ -9,13 +10,24 @@ import './App.css'
 
 
 function App() {
-
+  const [allPosts, setAllPosts] = useState([])
+  const [filteredPosts, setFilteredPosts] = useState([])
+  useEffect(() => {
+    axios.get("http://localhost:3000/posts/all")
+      .then(allPosts => {
+        setAllPosts(allPosts.data)
+        setFilteredPosts(allPosts.data)
+      })
+      .catch(err => {
+        console.log("err", err)
+      })
+  }, [])
   return (
     <div className="App">
-      <Nav />
+      <Nav allPosts={allPosts} setAllPosts={setAllPosts} filteredPosts={filteredPosts} setFilteredPosts={setFilteredPosts} />
       <Routes>
         <Route path='/create-post' element={<Createpost />} />
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Home allPosts={allPosts} setAllPosts={setAllPosts} filteredPosts={filteredPosts} />} />
         <Route path='/post/:id' element={<Postpage />} />
         <Route path='/profile' element={<Profile />} />
       </Routes>

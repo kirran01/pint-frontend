@@ -10,10 +10,11 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Searchbar from './searchbar';
 
 
 
-const Nav = () => {
+const Nav = ({ allPosts, setAllPosts, updatePostList }) => {
     const { user, isLoggedIn, logOut } = useContext(AuthContext);
     function openModal() {
         setIsOpen(true);
@@ -67,12 +68,7 @@ const Nav = () => {
                 </Link>
 
             </ul>
-            <div className='searchbar-container-outer'>
-                <span className='searchbar-icon'><img style={{ height: '20px' }} src="../../public/img/magnify.png" alt="" /></span>
-                <div className='searchbar-container-inner'>
-                    <input id="searchbarId" className='searchbar' type="text" placeholder='Search' />
-                </div>
-            </div>
+            <Searchbar allPosts={allPosts} setAllPosts={setAllPosts} updatePostList={updatePostList} />
             <div className='nav-icons'>
                 <NotificationsIcon className="nav-icon" />
                 <ChatBubbleIcon className="nav-icon" />

@@ -45,9 +45,9 @@ const Comment = ({ post, setPost, comment }) => {
                 <h5 style={{ margin: '3px 10px 25px' }}>reply</h5>
                 <FavoriteBorderIcon />
                 <MoreHorizIcon onClick={openEditBox} />
-                {openEdit && <div className='edit-comment-buttons' style={{ display: 'flex', padding: '10px', flexDirection: 'column',margin:'8px' }}>
-                    <button onClick={editComment}><p style={{ margin: '0px', textAlign: 'left', margin: '10px' }}>Edit</p></button>
-                    <button onClick={deleteComment}><p style={{ margin: '0px', textAlign: 'left', margin: '10px' }}>Delete</p></button>
+                {openEdit && <div className='edit-comment-buttons' style={{ display: 'flex', padding: '10px', flexDirection: 'column', margin: '8px' }}>
+                    <button onClick={editComment}><p style={{ textAlign: 'left', margin: '10px' }}>Edit</p></button>
+                    <button onClick={deleteComment}><p style={{ textAlign: 'left', margin: '10px' }}>Delete</p></button>
                 </div>}
             </div>
         </div>
