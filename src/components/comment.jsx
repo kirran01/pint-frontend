@@ -7,8 +7,13 @@ import axios from 'axios';
 
 const Comment = ({ post, setPost, comment }) => {
     const [openEdit, setOpenEdit] = useState(false)
-    const editComment = () => {
-        console.log('edit')
+    const [openEditInput, setOpenEditInput] = useState(false)
+    const [newComment, setNewComment] = useState('')
+    const submitEditedComment = (e) => {
+        e.preventDefault()
+        axios.put(`https://localhost:3000/comments/update-comment/${comment._id}`, {
+            comment
+        })
     }
     const deleteComment = (e) => {
         e.preventDefault()
@@ -46,7 +51,7 @@ const Comment = ({ post, setPost, comment }) => {
                 <FavoriteBorderIcon />
                 <MoreHorizIcon onClick={openEditBox} />
                 {openEdit && <div className='edit-comment-buttons' style={{ display: 'flex', padding: '10px', flexDirection: 'column', margin: '8px' }}>
-                    <button onClick={editComment}><p style={{ textAlign: 'left', margin: '10px' }}>Edit</p></button>
+                    <button><p style={{ textAlign: 'left', margin: '10px' }}>Edit</p></button>
                     <button onClick={deleteComment}><p style={{ textAlign: 'left', margin: '10px' }}>Delete</p></button>
                 </div>}
             </div>

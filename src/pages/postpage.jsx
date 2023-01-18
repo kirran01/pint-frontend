@@ -42,7 +42,7 @@ const Postpage = () => {
             .then(res => {
                 setPost(res.data)
                 setCommentInput('')
-                console.log(post)
+                console.log(res.data)
             })
             .catch(err => {
                 console.log(err)

@@ -66,9 +66,8 @@ const Nav = ({ allPosts, setAllPosts, updatePosts }) => {
                 <Link style={{ color: "black", textDecoration: "none" }} to="/create-post">
                     Create
                 </Link>
-
             </ul>
-            <Searchbar allPosts={allPosts} setAllPosts={setAllPosts} updatePosts={updatePosts} />
+            <Searchbar allPosts={allPosts} updatePosts={updatePosts} />
             <div className='nav-icons'>
                 <NotificationsIcon className="nav-icon" />
                 <ChatBubbleIcon className="nav-icon" />

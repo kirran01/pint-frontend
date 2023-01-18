@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Searchbar = ({ allPosts, setAllPosts, filteredPosts, setFilteredPosts, updatePosts }) => {
+const Searchbar = ({ allPosts, updatePosts }) => {
     const filterResults = (e) => {
         const newPostList = allPosts.filter((post => {
             return post.title
                 .toLowerCase()
-                .includes(e.target.value.toLowerCase())
+                .includes(e.target.value.toLowerCase()) 
         }))
         updatePosts(newPostList)
     }
