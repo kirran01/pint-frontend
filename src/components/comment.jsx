@@ -12,8 +12,14 @@ const Comment = ({ post, setPost, comment }) => {
     const submitEditedComment = (e) => {
         e.preventDefault()
         axios.put(`https://localhost:3000/comments/update-comment/${comment._id}`, {
-            comment
+            comment: newComment
         })
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
     const deleteComment = (e) => {
         e.preventDefault()
@@ -33,6 +39,7 @@ const Comment = ({ post, setPost, comment }) => {
             setOpenEdit(true)
         }
         else {
+            setOpenEditInput(false)
             setOpenEdit(false)
         }
     }
@@ -41,9 +48,16 @@ const Comment = ({ post, setPost, comment }) => {
             <div style={{ display: 'flex' }}>
                 <div style={{ display: 'flex', alignItems: 'flex-start', marginTop: '2px' }}>
                     <AccountCircleIcon />
-                    {post.comments[0].owner && <h5 style={{ margin: '2px' }}>{post.comments[0].owner.username}</h5>}
+                    {comment && <h5 style={{ margin: '2px' }}>{comment.owner.username}</h5>}
                 </div>
-                <p style={{ fontSize: '15px', fontWeight: 'lighter', margin: '2px 5px 5px' }}>{comment.comment}</p>
+                {openEditInput ? <>
+                    <form onSubmit={submitEditedComment}>
+                        <input type="text" value={newComment} onChange={(e) => { setNewComment(e.target.value) }} />
+                        <button type='submit'>submit</button>
+                    </form>
+                </> :
+                    <p style={{ fontSize: '15px', fontWeight: 'lighter', margin: '2px 5px 5px' }}>{comment.comment}</p>
+                }
             </div>
             <div style={{ display: 'flex', marginLeft: '12px' }}>
                 <h5 style={{ margin: '3px 10px 25px' }}>{new Date(post.comments[0].day).toDateString().substring(3)}</h5>
@@ -51,7 +65,7 @@ const Comment = ({ post, setPost, comment }) => {
                 <FavoriteBorderIcon />
                 <MoreHorizIcon onClick={openEditBox} />
                 {openEdit && <div className='edit-comment-buttons' style={{ display: 'flex', padding: '10px', flexDirection: 'column', margin: '8px' }}>
-                    <button><p style={{ textAlign: 'left', margin: '10px' }}>Edit</p></button>
+                    <button onClick={() => { setOpenEditInput(true) }}><p style={{ textAlign: 'left', margin: '10px' }}>Edit</p></button>
                     <button onClick={deleteComment}><p style={{ textAlign: 'left', margin: '10px' }}>Delete</p></button>
                 </div>}
             </div>

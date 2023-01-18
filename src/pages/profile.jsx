@@ -11,8 +11,8 @@ const Profile = () => {
     return (
         <div className='profile-page'>
             <AccountCircleIcon sx={{ fontSize: 120 }} />
-            {user && <h1>{user.name}</h1>}
-            {user && <p>@{user.name}</p>}
+            {user && <h1>{user.username}</h1>}
+            {user && <p>@{user.username}</p>}
             <div style={{ display: 'flex' }}>
                 <button style={{ margin: '5px' }}>Share</button>
                 <button style={{ margin: '5px' }}>Edit Profile</button>

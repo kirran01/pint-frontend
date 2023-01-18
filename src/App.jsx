@@ -12,12 +12,16 @@ import './App.css'
 function App() {
   const [allPosts, setAllPosts] = useState([])
   const [filteredPosts, setFilteredPosts] = useState([])
-  const updatePosts=(updatedPosts)=>{
+  const updatePosts = (updatedPosts) => {
     setFilteredPosts(updatedPosts)
   }
   useEffect(() => {
-
-    axios.get("http://localhost:3000/posts/all")
+    const headers = {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('authToken')}`
+      }
+    };
+    axios.get("http://localhost:3000/posts/all", headers)
       .then(allPosts => {
         setAllPosts(allPosts.data)
         setFilteredPosts(allPosts.data)
@@ -26,6 +30,8 @@ function App() {
         console.log("err", err)
       })
   }, [])
+  console.log(allPosts, "a")
+  console.log(filteredPosts, "f")
   return (
     <div className="App">
       <Nav allPosts={allPosts} setAllPosts={setAllPosts} filteredPosts={filteredPosts} setFilteredPosts={setFilteredPosts} updatePosts={updatePosts} />

@@ -13,7 +13,7 @@ const Home = ({ allPosts, filteredPosts, setAllPosts }) => {
                     filteredPosts.map(post => {
                         return (
                             <>
-                                <Post key={post._id} post={post} allPosts={allPosts} setAllPosts={setAllPosts} />
+                                <Post post={post} allPosts={allPosts} setAllPosts={setAllPosts} />
                             </>
                         )
                     })
