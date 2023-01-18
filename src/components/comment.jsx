@@ -11,8 +11,12 @@ const Comment = ({ post, setPost, comment }) => {
     const [newComment, setNewComment] = useState('')
     const submitEditedComment = (e) => {
         e.preventDefault()
-        axios.put(`https://localhost:3000/comments/update-comment/${comment._id}`, {
+        axios.put(`http://localhost:3000/comments/update-comment/${comment._id}`, {
             comment: newComment
+        }, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('authToken')}`
+            }
         })
             .then(res => {
                 console.log(res.data)

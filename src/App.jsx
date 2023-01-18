@@ -30,8 +30,6 @@ function App() {
         console.log("err", err)
       })
   }, [])
-  console.log(allPosts, "a")
-  console.log(filteredPosts, "f")
   return (
     <div className="App">
       <Nav allPosts={allPosts} setAllPosts={setAllPosts} filteredPosts={filteredPosts} setFilteredPosts={setFilteredPosts} updatePosts={updatePosts} />
