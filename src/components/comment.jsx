@@ -1,5 +1,6 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { AuthContext } from '../context/auth.context';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -19,7 +20,8 @@ const Comment = ({ post, setPost, comment }) => {
             }
         })
             .then(res => {
-                console.log(res.data, "resdata")
+                setOpenEdit(false)
+                setOpenEditInput(false)
                 setPost(res.data)
             })
             .catch(err => {
@@ -30,7 +32,6 @@ const Comment = ({ post, setPost, comment }) => {
         e.preventDefault()
         axios.delete(`http://localhost:3000/comments/delete/${comment._id}`)
             .then(res => {
-                console.log(res.data, "resdata")
                 setPost(res.data)
                 setOpenEdit(false)
             })
@@ -52,13 +53,21 @@ const Comment = ({ post, setPost, comment }) => {
         <div className='comment'>
             <div style={{ display: 'flex' }}>
                 <div style={{ display: 'flex', alignItems: 'flex-start', marginTop: '2px' }}>
-                    <AccountCircleIcon />
+                    {
+                        comment.owner.profileImage ? <>
+                            <div className='profile-image-container-comment'>
+                                <img className='profile-image-comment' src={comment.owner.profileImage} alt="profile-image" />
+                            </div>
+                        </> :
+
+                            <AccountCircleIcon />
+                    }
                     {comment && <h5 style={{ margin: '2px' }}>{comment.owner.username}</h5>}
                 </div>
                 {openEditInput ? <>
                     <form onSubmit={submitEditedComment}>
-                        <input type="text" value={newComment} onChange={(e) => { setNewComment(e.target.value) }} />
-                        <button type='submit'>submit</button>
+                        <input style={{borderRadius:'5px', border:'1px solid'}} onClick={()=>{setOpenEdit(false)}} type="text" value={newComment} onChange={(e) => { setNewComment(e.target.value) }} />
+                        <button style={{padding:'5px', border:'none', borderRadius:'5px'}} type='submit'>submit</button>
                     </form>
                 </> :
                     <p style={{ fontSize: '15px', fontWeight: 'lighter', margin: '2px 5px 5px' }}>{comment.comment}</p>

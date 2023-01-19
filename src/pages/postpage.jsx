@@ -12,7 +12,6 @@ import Comment from '../components/comment';
 const Postpage = () => {
     const { id } = useParams();
     const [post, setPost] = useState(null)
-    const { storeToken, user, authenticateUser } = useContext(AuthContext)
     const [commentInput, setCommentInput] = useState('')
     const handleCommentInput = (e) => {
         setCommentInput(e.target.value)
@@ -20,7 +19,6 @@ const Postpage = () => {
     useEffect(() => {
         axios.get(`http://localhost:3000/posts/${id}`)
             .then(post => {
-                console.log(post.data)
                 setPost(post.data)
             })
             .catch(err => {
@@ -40,7 +38,6 @@ const Postpage = () => {
             .then(res => {
                 setPost(res.data)
                 setCommentInput('')
-                console.log(res.data)
             })
             .catch(err => {
                 console.log(err)

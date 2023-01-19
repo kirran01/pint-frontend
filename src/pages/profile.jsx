@@ -7,12 +7,10 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { AuthContext } from '../context/auth.context';
 import { useState, useContext, useEffect } from 'react';
 
-const Profile = ({}) => {
+const Profile = ({ allPosts, setAllPosts }) => {
     const { storeToken, user, authenticateUser } = useContext(AuthContext)
     const [usersPosts, setUsersPosts] = useState([])
-
     useEffect(() => {
-        console.log('running use effect')
         if (user) {
             const headers = {
                 headers: {
@@ -21,22 +19,24 @@ const Profile = ({}) => {
             };
             axios.get("http://localhost:3000/posts/all", headers)
                 .then(allPosts => {
-                    console.log(user)
                     const thisUsersPosts = allPosts.data.filter(post => {
                         return post.owner === user._id
                     })
                     setUsersPosts(thisUsersPosts)
-                    console.log(thisUsersPosts, "typ")
                 })
                 .catch(err => {
                     console.log("err", err)
                 })
         }
-    },[user])
-    console.log('right before render..')
+    }, [user])
     return (
         <div className='profile-page'>
-            <AccountCircleIcon sx={{ fontSize: 120 }} />
+            {user && <>
+                <div className='profile-image-container'>
+                    <img className='profile-image' src={user.profileImage} alt="profile-image" />
+                </div>
+            </>
+            }
             {user && <h1>{user.username}</h1>}
             {user && <p>@{user.username}</p>}
             <div style={{ display: 'flex' }}>
@@ -59,11 +59,11 @@ const Profile = ({}) => {
             </div>
             <hr />
             <h2>Your Posts</h2>
-            <div className='profile-own-posts'>
+            <div className='home-posts'>
                 {usersPosts.map(post => {
                     return (
                         <>
-                            <Post post={post} allPosts={allPosts} setAllPosts={setAllPosts}/>
+                            <Post key={post._id} post={post} allPosts={allPosts} setAllPosts={setAllPosts} />
                         </>
                     )
                 })

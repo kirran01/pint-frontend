@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
 
-const Createpost = () => {
+const Createpost = ({ allPosts, setAllPosts, filteredPosts, setFilteredPosts, updatePosts }) => {
     const { user, isLoggedIn, logOut } = useContext(AuthContext);
     const [postInput, setPostInput] = useState({
         title: '',
@@ -22,14 +22,21 @@ const Createpost = () => {
             description: postInput.description,
             link: postInput.link,
             image: postInput.imageUrl
-        },{
+        }, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('authToken')}`
             }
         })
-            .then(submittedPost => {
-                console.log(submittedPost, "<--created new post")
-                //set state
+            .then(res => {
+                setPostInput({
+                    title: '',
+                    description: '',
+                    link: '',
+                    imageUrl: ''
+                })
+                setAllPosts([...allPosts, res.data])
+                setFilteredPosts([...filteredPosts, res.data])
+                console.log(res.data, "<--created new post")
             })
             .catch(err => {
                 console.log(err, "<--err")

@@ -34,7 +34,7 @@ function App() {
     <div className="App">
       <Nav allPosts={allPosts} setAllPosts={setAllPosts} filteredPosts={filteredPosts} setFilteredPosts={setFilteredPosts} updatePosts={updatePosts} />
       <Routes>
-        <Route path='/create-post' element={<Createpost />} />
+        <Route path='/create-post' element={<Createpost allPosts={allPosts} setAllPosts={setAllPosts} filteredPosts={filteredPosts} setFilteredPosts={setFilteredPosts} />} />
         <Route path='/' element={<Home allPosts={allPosts} setAllPosts={setAllPosts} filteredPosts={filteredPosts} />} />
         <Route path='/post/:id' element={<Postpage />} />
         <Route path='/profile' element={<Profile allPosts={allPosts} setAllPosts={setAllPosts} />} />

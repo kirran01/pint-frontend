@@ -164,6 +164,15 @@ margin-right: 25px;
   margin: 10px;
 }
 
+.create-post-form-container hr{
+  border: 0;
+  clear:both;
+  display:block;
+  width: 96%;               
+  background-color:black;
+  height: 1px;
+}
+
 .create-post-container{
 border-radius: 10px;
 display: flex;
@@ -216,6 +225,7 @@ padding-left: 1em;
   border-top-style: hidden;
   border-right-style: hidden;
   border-left-style: hidden;
+  border-bottom: 1px solid;
   font-size: 25px;
   height:120px;
   width: 500px;
@@ -408,6 +418,36 @@ padding: 12px 12px 12px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.profile-image-container{
+  width: 100px;
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.profile-image-container img{
+  display: inline;
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+}
+
+.profile-image-container-comment{
+  width: 21px;
+  height: 21px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.profile-image-container-comment img{
+  display: inline;
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
 }
 
 .profile-page hr{
