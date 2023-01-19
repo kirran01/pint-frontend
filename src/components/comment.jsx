@@ -19,7 +19,8 @@ const Comment = ({ post, setPost, comment }) => {
             }
         })
             .then(res => {
-                console.log(res.data)
+                console.log(res.data, "resdata")
+                setPost(res.data)
             })
             .catch(err => {
                 console.log(err)

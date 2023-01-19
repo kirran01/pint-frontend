@@ -1,13 +1,11 @@
 import React from 'react';
 import axios from 'axios';
-import { useState, useContext, useEffect, useRef } from 'react';
+import { useState, useContext, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 import UploadIcon from '@mui/icons-material/Upload';
 import LinkIcon from '@mui/icons-material/Link';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Comment from '../components/comment';
 
@@ -20,10 +18,10 @@ const Postpage = () => {
         setCommentInput(e.target.value)
     }
     useEffect(() => {
-        axios.get('http://localhost:3000/posts/all')
-            .then(posts => {
-                let filteredPosts = posts.data.filter(post => post._id === id)
-                setPost(filteredPosts[0])
+        axios.get(`http://localhost:3000/posts/${id}`)
+            .then(post => {
+                console.log(post.data)
+                setPost(post.data)
             })
             .catch(err => {
                 console.log(err, "err")
