@@ -41,6 +41,7 @@ align-items: center;
 
 .login-component{
 text-align: center;
+width:100%;
 }
 
 .login-form input{
@@ -55,6 +56,15 @@ text-align: center;
   font-size: 14px;
   padding:10px 45px 10px 10px;
   height: 36px;
+}
+
+.login-form hr{
+  border: 0;
+  clear:both;
+  display:block;
+  width: 50%;               
+  background-color:black;
+  height: 1px;
 }
 
 .pintrest-logo{
@@ -311,7 +321,7 @@ filter: brightness(50%);
 
 .searchbar-container-inner{
   position: relative;
-  width: 100%;
+  width: 99%;
 }
 
 .home-button{

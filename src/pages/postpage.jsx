@@ -1,8 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import { useState, useContext, useEffect} from 'react';
+import { useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
-import { AuthContext } from '../context/auth.context';
 import UploadIcon from '@mui/icons-material/Upload';
 import LinkIcon from '@mui/icons-material/Link';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';

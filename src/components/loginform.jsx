@@ -3,7 +3,7 @@ import { useState, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/auth.context';
 
-const Loginform = () => {
+const Loginform = ({closeModal2}) => {
     const { storeToken, authenticateUser } = useContext(AuthContext)
     const [loginInput, setLoginInput] = useState({
         loginUserName: '',
@@ -12,7 +12,6 @@ const Loginform = () => {
     const handleLoginInput = (e) => {
         setLoginInput({ ...loginInput, [e.target.name]: e.target.value })
     }
-
     const submitLogin = (e) => {
         e.preventDefault()
         axios.post('http://localhost:3000/auth/login', {
@@ -23,12 +22,12 @@ const Loginform = () => {
                 console.log(loginRes.data)
                 storeToken(loginRes.data.authToken)
                 authenticateUser()
+                closeModal2()
             })
             .catch(err => {
                 console.log(err, "<--err")
             })
     }
-
     return (
         <div className='login-component'>
             <div className='pintrest-logo'>
@@ -70,7 +69,9 @@ const Loginform = () => {
                 <div className='terms'>
                     <h6>By continuing you agree to Kintrest's Terms Of Service and acknowledge you've read our Privacy Policy. Notice at collection.</h6>
                 </div>
+                <div>
                 <hr />
+                </div>
                 <div className='end-terms'>
                     <h6>Not on pintrest yet? Sign up</h6>
                     <h6>Are you a business? Get started here!</h6>

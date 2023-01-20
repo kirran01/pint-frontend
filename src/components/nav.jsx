@@ -53,42 +53,42 @@ const Nav = ({ allPosts, setAllPosts, updatePosts }) => {
                         Home
                     </Link>
                 </div>
-                <li onClick={openModal}>
+                {!isLoggedIn && <li onClick={openModal}>
                     Sign Up
-                </li>
-                <li onClick={openModal2}>
+                </li>}
+                {!isLoggedIn && <li onClick={openModal2}>
                     Log In
-                </li>
-                <li onClick={logOut}>
+                </li>}
+                {isLoggedIn&& <li onClick={logOut}>
                     Log Out
-                </li>
-
-                <Link style={{ color: "black", textDecoration: "none" }} to="/create-post">
+                </li>}
+                {isLoggedIn && <Link style={{ color: "black", textDecoration: "none" }} to="/create-post">
                     Create
-                </Link>
+                </Link>}
             </ul>
             <Searchbar allPosts={allPosts} updatePosts={updatePosts} />
             <div className='nav-icons'>
-                <NotificationsIcon className="nav-icon" />
-                <ChatBubbleIcon className="nav-icon" />
-                <Link to='/profile'>
-                    <AccountCircleIcon className="nav-icon" />
-                </Link>
-                <ExpandMoreIcon className="nav-icon" />
+                {isLoggedIn && <><NotificationsIcon className="nav-icon" />
+                    <ChatBubbleIcon className="nav-icon" />
+                    <Link to='/profile'>
+                        <AccountCircleIcon className="nav-icon" />
+                    </Link>
+                    <ExpandMoreIcon className="nav-icon" />
+                </>}
             </div>
             <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
                 style={customStyles}
             >
-                <Signupform />
+                <Signupform closemodal={closeModal}/>
             </Modal>
             <Modal
                 style={customStyles}
                 isOpen={modalIsOpen2}
                 onRequestClose={closeModal2}
             >
-                <Loginform />
+                <Loginform closeModal2={closeModal2}/>
             </Modal>
         </nav>
     );
