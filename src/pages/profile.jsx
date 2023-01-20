@@ -10,6 +10,9 @@ import { useState, useContext, useEffect } from 'react';
 const Profile = ({ allPosts, setAllPosts }) => {
     const { storeToken, user, setUser, authenticateUser } = useContext(AuthContext)
     const [usersPosts, setUsersPosts] = useState([])
+    const [fieldToEdit, setFieldToEdit] = useState('')
+    const [extendEdit, setExtendEdit] = useState(false)
+    const [userEditInput, setUserEditInput] = useState('')
     const [imgInput, setImgInput] = useState(false)
     const [imgUrl, setImgUrl] = useState('')
     const handleUploadButton = () => {
@@ -19,7 +22,7 @@ const Profile = ({ allPosts, setAllPosts }) => {
             setImgInput(true)
         }
     }
-    console.log(user, 'u')
+
     useEffect(() => {
         if (user) {
             const headers = {
@@ -39,10 +42,10 @@ const Profile = ({ allPosts, setAllPosts }) => {
                 })
         }
     }, [user])
-    const submitImgURL = (e) => {
+    const updateUser = (e) => {
         e.preventDefault()
         axios.put('http://localhost:3000/auth/edit-user', {
-            profileImage: imgUrl
+            [fieldToEdit]: userEditInput
         },
             {
                 headers: {
@@ -53,6 +56,7 @@ const Profile = ({ allPosts, setAllPosts }) => {
             .then(res => {
                 setUser(res.data.updatedUser)
                 storeToken(res.data.updatedToken)
+                setFieldToEdit('')
             })
             .catch(err => {
                 console.log(err)
@@ -66,21 +70,61 @@ const Profile = ({ allPosts, setAllPosts }) => {
                 </div>
             </> : <>
                 <AccountCircleIcon sx={{ fontSize: 120 }} />
-                <button type="button" onClick={handleUploadButton}>{!imgInput ? <>upload</> : <>cancel</>}</button>
+                {/* <button type="button" onClick={handleUploadButton}>{!imgInput ? <>upload</> : <>cancel</>}</button>
                 {imgInput && <>
                     <form onSubmit={submitImgURL}>
                         <input onChange={(e) => { setImgUrl(e.target.value) }} value={imgUrl} type="text" placeholder='ImageURL' />
-                        <button onClick={() => { setImgInput(false) }}>submit</button>
+                        <button onClick={() => { setImgInput(false) }}>Submit</button>
                     </form>
 
-                </>}
+                </>} */}
             </>
             }
-            {user && <h1>{user.username}</h1>}
-            {user && <p>@{user.username}</p>}
+            {user && <>
+                {fieldToEdit == "username" ? <>
+                    <form onSubmit={updateUser}>
+                        <input value={userEditInput} onChange={(e) => { setUserEditInput(e.target.value) }} type="text" />
+                        <button>Submit</button>
+                        <button onClick={() => {
+                            setFieldToEdit('')
+                            setUserEditInput('')
+                        }}>Cancel</button>
+                    </form>
+                </> : <>
+                    <h1>{user.username}</h1>
+                </>}
+
+            </>}
+            {user && <>
+                {fieldToEdit == "email" ? <>
+                    <form onSubmit={updateUser}>
+                        <input value={userEditInput} onChange={(e) => { setUserEditInput(e.target.value) }} type="text" />
+                        <button>Submit</button>
+                        <button onClick={() => {
+                            setFieldToEdit('')
+                            setUserEditInput('')
+                        }}>Cancel</button>
+                    </form>
+                </> : <>
+                    <p>{user.email}</p>
+                </>}
+
+            </>}
             <div style={{ display: 'flex' }}>
                 <button style={{ margin: '5px' }}>Share</button>
-                <button style={{ margin: '5px' }}>Edit Profile</button>
+                {!extendEdit && <button onClick={() => { setExtendEdit(true) }} style={{ margin: '5px' }}>Edit Profile</button>}
+                {extendEdit && <>
+                    <button onClick={() => {
+                        setFieldToEdit('username')
+                        setExtendEdit(false)
+                    }}>Edit Username</button>
+                    <button onClick={() => {
+                        setFieldToEdit('email')
+                        setExtendEdit(false)
+                    }}>Edit Email</button>
+                    <button onClick={() => { setExtendEdit(false) }}>Cancel</button>
+                </>}
+
             </div>
             <div style={{ display: 'flex' }}>
                 <p style={{ margin: '5px 10px 5px' }}>Created</p>

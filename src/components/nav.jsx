@@ -81,8 +81,8 @@ const Nav = ({ allPosts, setAllPosts, updatePosts }) => {
             </ul>
             <Searchbar allPosts={allPosts} updatePosts={updatePosts} />
             <div className='nav-icons'>
-                {isLoggedIn && <><NotificationsIcon className="nav-icon" />
-
+                {isLoggedIn && <>
+                <NotificationsIcon className="nav-icon" />
                     <Link to='/profile'>
                     {
                         user.profileImage ? <>
