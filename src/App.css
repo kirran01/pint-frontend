@@ -441,7 +441,7 @@ padding: 12px 12px 12px;
 .profile-image-container img{
   display: inline;
   margin: 0 auto;
-  height: 100%;
+  height: 150%;
   width: auto;
 }
 
@@ -456,7 +456,7 @@ padding: 12px 12px 12px;
 .profile-image-container-comment img{
   display: inline;
   margin: 0 auto;
-  height: 100%;
+  height: 150%;
   width: auto;
 }
 
