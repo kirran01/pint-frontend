@@ -489,3 +489,11 @@ padding: 12px 12px 12px;
   border-radius: 10px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
+
+#error-message-comment{
+  padding: 10px;
+  background-color: #efefef;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+}

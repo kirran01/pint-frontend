@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
 
-const Signupform = () => {
+const Signupform = ({closeModal}) => {
     const [signUpInput, setSignUpInput] = useState({
         signUpEmail: '',
         signUpPassword: '',
@@ -21,6 +21,7 @@ const Signupform = () => {
         })
             .then(createdUser => {
                 console.log(createdUser.data)
+                closeModal()
             })
             .catch(err => {
                 console.log(err)

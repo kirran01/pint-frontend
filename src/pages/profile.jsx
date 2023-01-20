@@ -8,8 +8,18 @@ import { AuthContext } from '../context/auth.context';
 import { useState, useContext, useEffect } from 'react';
 
 const Profile = ({ allPosts, setAllPosts }) => {
-    const { storeToken, user, authenticateUser } = useContext(AuthContext)
+    const { storeToken, user, setUser, authenticateUser } = useContext(AuthContext)
     const [usersPosts, setUsersPosts] = useState([])
+    const [imgInput, setImgInput] = useState(false)
+    const [imgUrl, setImgUrl] = useState('')
+    const handleUploadButton = () => {
+        if (imgInput) {
+            setImgInput(false)
+        } else {
+            setImgInput(true)
+        }
+    }
+    console.log(user, 'u')
     useEffect(() => {
         if (user) {
             const headers = {
@@ -29,12 +39,41 @@ const Profile = ({ allPosts, setAllPosts }) => {
                 })
         }
     }, [user])
+    const submitImgURL = (e) => {
+        e.preventDefault()
+        axios.put('http://localhost:3000/auth/edit-user', {
+            profileImage: imgUrl
+        },
+            {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('authToken')}`
+                }
+            }
+        )
+            .then(res => {
+                setUser(res.data.updatedUser)
+                storeToken(res.data.updatedToken)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
     return (
         <div className='profile-page'>
-            {user && <>
+            {user && user.profileImage ? <>
                 <div className='profile-image-container'>
                     <img className='profile-image' src={user.profileImage} alt="profile-image" />
                 </div>
+            </> : <>
+                <AccountCircleIcon sx={{ fontSize: 120 }} />
+                <button type="button" onClick={handleUploadButton}>{!imgInput ? <>upload</> : <>cancel</>}</button>
+                {imgInput && <>
+                    <form onSubmit={submitImgURL}>
+                        <input onChange={(e) => { setImgUrl(e.target.value) }} value={imgUrl} type="text" placeholder='ImageURL' />
+                        <button onClick={() => { setImgInput(false) }}>submit</button>
+                    </form>
+
+                </>}
             </>
             }
             {user && <h1>{user.username}</h1>}

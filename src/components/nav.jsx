@@ -81,7 +81,7 @@ const Nav = ({ allPosts, setAllPosts, updatePosts }) => {
                 onRequestClose={closeModal}
                 style={customStyles}
             >
-                <Signupform closemodal={closeModal}/>
+                <Signupform closeModal={closeModal}/>
             </Modal>
             <Modal
                 style={customStyles}

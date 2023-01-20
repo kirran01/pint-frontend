@@ -11,7 +11,15 @@ const Comment = ({ post, setPost, comment }) => {
     const { user, isLoggedIn, logOut } = useContext(AuthContext);
     const [openEditInput, setOpenEditInput] = useState(false)
     const [newComment, setNewComment] = useState('')
-
+    const [errorMessage, setErrorMessage] = useState(false);
+    const flashError = () => {
+        setOpenEdit(false)
+        setErrorMessage(true);
+        setTimeout(() => {
+            setErrorMessage(false);
+        }, 2000);
+    };
+    
     const submitEditedComment = (e) => {
         e.preventDefault()
         axios.put(`http://localhost:3000/comments/update-comment/${comment._id}`, {
@@ -33,6 +41,7 @@ const Comment = ({ post, setPost, comment }) => {
     const deleteComment = (e) => {
         if (comment.owner._id !== user._id) {
             console.log('not the owner')
+            flashError()
         } else {
             e.preventDefault()
             axios.delete(`http://localhost:3000/comments/delete/${comment._id}`)
@@ -64,7 +73,6 @@ const Comment = ({ post, setPost, comment }) => {
                                 <img className='profile-image-comment' src={comment.owner.profileImage} alt="profile-image" />
                             </div>
                         </> :
-
                             <AccountCircleIcon />
                     }
                     {comment && <h5 style={{ margin: '2px' }}>{comment.owner.username}</h5>}
@@ -77,6 +85,9 @@ const Comment = ({ post, setPost, comment }) => {
                 </> :
                     <p style={{ fontSize: '15px', fontWeight: 'lighter', margin: '2px 5px 5px' }}>{comment.comment}</p>
                 }
+                {errorMessage && <>
+                    <span id='error-message-comment'>Not Authorized</span>
+                </>}
             </div>
             <div style={{ display: 'flex', marginLeft: '12px' }}>
                 <h5 style={{ margin: '3px 10px 25px' }}>{new Date(post.comments[0].day).toDateString().substring(3)}</h5>
@@ -87,6 +98,7 @@ const Comment = ({ post, setPost, comment }) => {
                     <button onClick={() => {
                         if (comment.owner._id !== user._id) {
                             console.log('not the owner')
+                            flashError()
                         } else {
                             setOpenEditInput(true)
                         }
