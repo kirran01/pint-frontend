@@ -16,7 +16,6 @@ import Searchbar from './searchbar';
 
 const Nav = ({ allPosts, setAllPosts, updatePosts }) => {
     const { user, isLoggedIn, logOut } = useContext(AuthContext);
-    console.log(user,'un')
     function openModal() {
         setIsOpen(true);
     }
@@ -49,7 +48,7 @@ const Nav = ({ allPosts, setAllPosts, updatePosts }) => {
             bottom: 'auto',
             borderRadius: '30px',
             transform: 'translate(-50%, -50%)',
-            marginTop:'25px'
+            marginTop: '25px'
         },
     }
     const [modalIsOpen2, setIsOpen2] = useState(false);
@@ -72,7 +71,7 @@ const Nav = ({ allPosts, setAllPosts, updatePosts }) => {
                 {!isLoggedIn && <li onClick={openModal2}>
                     Log In
                 </li>}
-                {isLoggedIn&& <li onClick={logOut}>
+                {isLoggedIn && <li onClick={logOut}>
                     Log Out
                 </li>}
                 {isLoggedIn && <Link style={{ color: "black", textDecoration: "none" }} to="/create-post">
@@ -82,16 +81,16 @@ const Nav = ({ allPosts, setAllPosts, updatePosts }) => {
             <Searchbar allPosts={allPosts} updatePosts={updatePosts} />
             <div className='nav-icons'>
                 {isLoggedIn && <>
-                <NotificationsIcon className="nav-icon" />
+                    <NotificationsIcon className="nav-icon" />
                     <Link to='/profile'>
-                    {
-                        user.profileImage ? <>
-                            <div className='profile-image-container-comment nav-icon'>
-                                <img className='profile-image-comment' src={user.profileImage} alt="profile-image" />
-                            </div>
-                        </> :
-                            <AccountCircleIcon />
-                    }
+                        {
+                            user.profileImage ? <>
+                                <div className='profile-image-container-comment nav-icon'>
+                                    <img className='profile-image-comment' src={user.profileImage} alt="profile-image" />
+                                </div>
+                            </> :
+                                <AccountCircleIcon />
+                        }
                     </Link>
                     <ExpandMoreIcon className="nav-icon" />
                 </>}
@@ -101,14 +100,14 @@ const Nav = ({ allPosts, setAllPosts, updatePosts }) => {
                 onRequestClose={closeModal}
                 style={customStyles2}
             >
-                <Signupform closeModal={closeModal}/>
+                <Signupform closeModal={closeModal} />
             </Modal>
             <Modal
                 style={customStyles}
                 isOpen={modalIsOpen2}
                 onRequestClose={closeModal2}
             >
-                <Loginform closeModal2={closeModal2}/>
+                <Loginform closeModal2={closeModal2} />
             </Modal>
         </nav>
     );

@@ -1,17 +1,37 @@
 import React from 'react';
 import axios from 'axios';
-import { useState, useEffect} from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import UploadIcon from '@mui/icons-material/Upload';
 import LinkIcon from '@mui/icons-material/Link';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Comment from '../components/comment';
+import { AuthContext } from '../context/auth.context';
 
 const Postpage = () => {
     const { id } = useParams();
     const [post, setPost] = useState(null)
+    const { storeToken, user, setUser, authenticateUser } = useContext(AuthContext)
     const [commentInput, setCommentInput] = useState('')
+    console.log(user, 'u')
+    console.log(post, 'p')
+    const addToFavorites = (e) => {
+        e.preventDefault()
+        axios.put('http://localhost:3000/posts/add-favorite', {
+            post: post._id
+        }, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('authToken')}`
+            }
+        })
+            .then(res => {
+                console.log(res.data, 'respp')
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
     const handleCommentInput = (e) => {
         setCommentInput(e.target.value)
     }
@@ -60,7 +80,7 @@ const Postpage = () => {
                                 <p id="profile-button">Profile</p>
                                 <ExpandMoreIcon />
                             </div>
-                            <p id='save-button'>Save</p>
+                            <p style={{ cursor: 'pointer' }} onClick={addToFavorites} id='save-button'>Save</p>
                         </div>
                     </div>
                     <div className='post-page-content-link'>
