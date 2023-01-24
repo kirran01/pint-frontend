@@ -82,3 +82,7 @@ const Loginform = ({closeModal2}) => {
 }
 
 export default Loginform;
+
+
+
+

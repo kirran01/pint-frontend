@@ -50,7 +50,9 @@ const Createpost = ({ allPosts, setAllPosts, filteredPosts, setFilteredPosts, up
                         <div className='upload-post-icon-container'><img className='upload-post-icon' style={{ height: '35px' }} src="../../public/img/upload.png" alt="upload-icon" /> <h4>drag and drop  or click to <br />upload</h4></div>
                         <h5>Reccomendation: Use high-quality .jpg files less than 20MB</h5>
                     </div>
-                    <button>Save from site</button>
+                    <div>
+                        <button>Save from site</button>
+                    </div>
                 </div>
                 <div className='create-post-form-container'>
                     <form className='create-post-form' onSubmit={submitPost}>

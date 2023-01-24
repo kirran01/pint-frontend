@@ -8,6 +8,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Comment from '../components/comment';
 import { AuthContext } from '../context/auth.context';
+import e from 'cors';
 
 const Postpage = () => {
     const { id } = useParams();
@@ -16,6 +17,14 @@ const Postpage = () => {
     const [commentInput, setCommentInput] = useState('')
     console.log(user, 'u')
     console.log(post, 'p')
+    function checkForId(id){
+        const object = user.favorites.find(favorite => favorite._id === id);
+        if (object) {
+            console.log(`Object found with id ${id}`);
+        } else {
+            console.log(`Object with id ${id} not found`);
+        }
+    }
     const addToFavorites = (e) => {
         e.preventDefault()
         axios.put('http://localhost:3000/posts/add-favorite', {
@@ -80,7 +89,7 @@ const Postpage = () => {
                                 <p id="profile-button">Profile</p>
                                 <ExpandMoreIcon />
                             </div>
-                            <p style={{ cursor: 'pointer' }} onClick={addToFavorites} id='save-button'>Save</p>
+                            {user && post && <p style={{ cursor: 'pointer' }} onClick={()=>{checkForId(post._id)}} id='save-button'>Save</p>}
                         </div>
                     </div>
                     <div className='post-page-content-link'>

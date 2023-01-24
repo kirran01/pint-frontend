@@ -255,8 +255,8 @@ margin: 10px;
 
 .upload-post-container button{
   border: none;
-  margin: 10px 5px 5px;
-  padding: 10px 100px 10px;
+  margin: 10px;
+  padding:10px;
   background-color:#e9e9e9;
   border-radius: 50px;
   font-size: 20px;
@@ -379,6 +379,7 @@ filter: brightness(50%);
   display: flex;
   align-items: center;
   transform: scale(1.5);
+  margin-right: 10px;
 }
 
 .post-page-content-link a{
@@ -496,4 +497,45 @@ padding: 12px 12px 12px;
   display: flex;
   align-items: center;
   border-radius: 10px;
+}
+
+@media(max-width:640px){
+.post-page-content-card{
+  flex-direction: column;
+}
+
+.post-page-content-img{
+ display: flex;
+ justify-content: center;
+}
+
+.upload-post-container{
+  display: none;
+}
+
+.create-post-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+}
+
+@media(max-width:768px){
+  .post-page-content-card{
+    flex-direction: column;
+  }
+  .post-page-content-img{
+    display: flex;
+    justify-content: center;
+   }
+   .upload-post-container{
+    display: none;
+  }
+  .create-post-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
