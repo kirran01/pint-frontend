@@ -11,22 +11,15 @@ import { AuthContext } from '../context/auth.context';
 import e from 'cors';
 
 const Postpage = () => {
+    //favorites are deleted on reload, preventing identical usernames/emails, replies
     const { id } = useParams();
     const [post, setPost] = useState(null)
     const { storeToken, user, setUser, authenticateUser } = useContext(AuthContext)
     const [commentInput, setCommentInput] = useState('')
     console.log(user, 'u')
     console.log(post, 'p')
-    function checkForId(id){
-        const object = user.favorites.find(favorite => favorite._id === id);
-        if (object) {
-            console.log(`Object found with id ${id}`);
-        } else {
-            console.log(`Object with id ${id} not found`);
-        }
-    }
     const addToFavorites = (e) => {
-        e.preventDefault()
+        // e.preventDefault()
         axios.put('http://localhost:3000/posts/add-favorite', {
             post: post._id
         }, {
@@ -40,6 +33,15 @@ const Postpage = () => {
             .catch(err => {
                 console.log(err)
             })
+    }
+    function checkForId(id){
+        const object = user.favorites.find(favorite => favorite._id === id);
+        if (object) {
+            console.log(`Object found with id ${id}`);
+        } else {
+            addToFavorites()
+            console.log(`Object with id ${id} not found`);
+        }
     }
     const handleCommentInput = (e) => {
         setCommentInput(e.target.value)
