@@ -12,9 +12,10 @@ import { AuthContext } from '../context/auth.context';
 const Postpage = () => {
     const { id } = useParams();
     const [post, setPost] = useState(null)
+    const [favorited, setFavorited] = useState()
     const { storeToken, user, setUser, authenticateUser } = useContext(AuthContext)
     const [commentInput, setCommentInput] = useState('')
-    console.log(post, 'p')
+
     const removeFromFavorites = (e) => {
         e.preventDefault()
         axios.delete(`http://localhost:3000/posts/delete-favorite/${post._id}`, {
@@ -55,6 +56,7 @@ const Postpage = () => {
             console.log(`Object with id ${id} not found`);
         }
     }
+
     const handleCommentInput = (e) => {
         setCommentInput(e.target.value)
     }

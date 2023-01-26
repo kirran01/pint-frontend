@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Modal from 'react-modal';
 import Post from '../components/post';
 import AddIcon from '@mui/icons-material/Add';
 import AlignHorizontalLeftIcon from '@mui/icons-material/AlignHorizontalLeft';
@@ -8,8 +9,26 @@ import { AuthContext } from '../context/auth.context';
 import { useState, useContext, useEffect } from 'react';
 
 const Profile = ({ allPosts, setAllPosts }) => {
+    function openModal() {
+        setIsOpen(true);
+    }
+    function closeModal() {
+        setIsOpen(false);
+    }
+    const customStyles = {
+        content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            borderRadius: '30px',
+            transform: 'translate(-50%, -50%)',
+        },
+    }
+    const [modalIsOpen, setIsOpen] = useState(false);
     const { storeToken, user, setUser, authenticateUser } = useContext(AuthContext)
     const [usersPosts, setUsersPosts] = useState([])
+    const [createdOrSaved, setCreatedOrSaved] = useState('')
     const [fieldToEdit, setFieldToEdit] = useState('')
     const [extendEdit, setExtendEdit] = useState(false)
     const [userEditInput, setUserEditInput] = useState('')
@@ -60,6 +79,20 @@ const Profile = ({ allPosts, setAllPosts }) => {
                 console.log(err)
             })
     }
+    const deleteUser = (e) => {
+        e.preventDefault()
+        axios.delete(`http://localhost:3000/auth/delete-user/${user._id}`, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('authToken')}`
+            }
+        })
+            .then(res => {
+                console.log(res, 'res')
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
     return (
         <div className='profile-page'>
             {user && user.profileImage ? <>
@@ -97,7 +130,7 @@ const Profile = ({ allPosts, setAllPosts }) => {
             </>}
             {user && <>
                 {fieldToEdit == "email" ? <>
-                    <form onSubmit={updateUser}>
+                    <form onSubmit={() => updateUser(e)}>
                         <input value={userEditInput} onChange={(e) => { setUserEditInput(e.target.value) }} type="text" />
                         <button>Submit</button>
                         <button onClick={() => {
@@ -111,7 +144,10 @@ const Profile = ({ allPosts, setAllPosts }) => {
 
             </>}
             <div style={{ display: 'flex' }}>
-                <button style={{ margin: '5px' }}>Share</button>
+                {!extendEdit ? <button style={{ margin: '5px' }}>Share</button>
+                    :
+                    <button onClick={openModal} style={{ backgroundColor: 'red', color: 'white' }}>Delete</button>
+                }
                 {!extendEdit && <button onClick={() => { setExtendEdit(true) }} style={{ margin: '5px' }}>Edit Profile</button>}
                 {extendEdit && <>
                     <button onClick={() => {
@@ -131,8 +167,8 @@ const Profile = ({ allPosts, setAllPosts }) => {
 
             </div>
             <div style={{ display: 'flex' }}>
-                <p style={{ margin: '5px 10px 5px' }}>Created</p>
-                <p style={{ margin: '5px 10px 5px' }}>Saved</p>
+                <p onClick={() => { setCreatedOrSaved('created') }} style={{ margin: '5px 10px 5px' }}>Created</p>
+                <p onClick={() => { setCreatedOrSaved('saved') }} style={{ margin: '5px 10px 5px' }}>Saved</p>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
                 <AlignHorizontalLeftIcon style={{ margin: '5px 10px 5px' }} />
@@ -162,6 +198,20 @@ const Profile = ({ allPosts, setAllPosts }) => {
                 })
                 }
             </div>
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                style={customStyles}
+                ariaHideApp={false}
+            >
+                <div style={{ display: 'flex', flexDirection: 'column' }} >
+                    <h3>Are you sure you want to Delete your Account?</h3>
+                    <form onSubmit={deleteUser} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                        <input type="text" placeholder='type DELETE' />
+                        <button>Confirm</button>
+                    </form>
+                </div>
+            </Modal>
         </div>
     );
 }
