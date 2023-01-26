@@ -68,6 +68,16 @@ const Profile = ({ allPosts, setAllPosts }) => {
                 </div>
             </> : <>
                 <AccountCircleIcon sx={{ fontSize: 120 }} />
+                {fieldToEdit === 'profileImage' && <>
+                    <form onSubmit={updateUser}>
+                        <input placeholder='Paste Img URL' value={userEditInput} onChange={(e) => { setUserEditInput(e.target.value) }} type="text" />
+                        <button>Submit</button>
+                        <button onClick={() => {
+                            setFieldToEdit('')
+                            setUserEditInput('')
+                        }}>Cancel</button>
+                    </form>
+                </>}
             </>
             }
             {user && <>
@@ -112,6 +122,10 @@ const Profile = ({ allPosts, setAllPosts }) => {
                         setFieldToEdit('email')
                         setExtendEdit(false)
                     }}>Edit Email</button>
+                    <button onClick={() => {
+                        setFieldToEdit('profileImage')
+                        setExtendEdit(false)
+                    }}>Change Picture</button>
                     <button onClick={() => { setExtendEdit(false) }}>Cancel</button>
                 </>}
 
