@@ -8,6 +8,7 @@ function AuthProviderWrapper(props) {
     const [user, setUser] = useState(null)
 
     const authenticateUser = () => {
+        console.log('running')
         const storedToken = localStorage.getItem('authToken')
         if (storedToken) {
             axios.get('http://localhost:3000/auth/verify', { headers: { Authorization: `Bearer ${storedToken}` } })
@@ -45,7 +46,7 @@ function AuthProviderWrapper(props) {
     }, [])
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, isLoading, user,setUser, storeToken, authenticateUser, logOut }}>
+        <AuthContext.Provider value={{ isLoggedIn, isLoading, user, setUser, storeToken, authenticateUser, logOut }}>
             {props.children}
         </AuthContext.Provider>
     )

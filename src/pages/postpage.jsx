@@ -8,16 +8,28 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Comment from '../components/comment';
 import { AuthContext } from '../context/auth.context';
-import e from 'cors';
 
 const Postpage = () => {
-    //favorites are deleted on reload, preventing identical usernames/emails, replies
     const { id } = useParams();
     const [post, setPost] = useState(null)
     const { storeToken, user, setUser, authenticateUser } = useContext(AuthContext)
     const [commentInput, setCommentInput] = useState('')
-    console.log(user, 'u')
     console.log(post, 'p')
+    const removeFromFavorites = (e) => {
+        e.preventDefault()
+        axios.delete(`http://localhost:3000/posts/delete-favorite/${post._id}`, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('authToken')}`
+            }
+        })
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
     const addToFavorites = (e) => {
         // e.preventDefault()
         axios.put('http://localhost:3000/posts/add-favorite', {
@@ -28,13 +40,13 @@ const Postpage = () => {
             }
         })
             .then(res => {
-                console.log(res.data, 'respp')
+                console.log(res.data)
             })
             .catch(err => {
                 console.log(err)
             })
     }
-    function checkForId(id){
+    function checkForId(id) {
         const object = user.favorites.find(favorite => favorite._id === id);
         if (object) {
             console.log(`Object found with id ${id}`);
@@ -91,7 +103,8 @@ const Postpage = () => {
                                 <p id="profile-button">Profile</p>
                                 <ExpandMoreIcon />
                             </div>
-                            {user && post && <p style={{ cursor: 'pointer' }} onClick={()=>{checkForId(post._id)}} id='save-button'>Save</p>}
+                            {user && post && <p style={{ cursor: 'pointer' }} onClick={(e) => { checkForId(post._id) }} id='save-button'>Save</p>}
+                            {user && <button onClick={removeFromFavorites}>remove</button>}
                         </div>
                     </div>
                     <div className='post-page-content-link'>

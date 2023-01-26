@@ -22,7 +22,6 @@ const Profile = ({ allPosts, setAllPosts }) => {
             setImgInput(true)
         }
     }
-
     useEffect(() => {
         if (user) {
             const headers = {
@@ -55,7 +54,6 @@ const Profile = ({ allPosts, setAllPosts }) => {
         )
             .then(res => {
                 setUser(res.data.updatedUser)
-                storeToken(res.data.updatedToken)
                 setFieldToEdit('')
             })
             .catch(err => {
@@ -70,14 +68,6 @@ const Profile = ({ allPosts, setAllPosts }) => {
                 </div>
             </> : <>
                 <AccountCircleIcon sx={{ fontSize: 120 }} />
-                {/* <button type="button" onClick={handleUploadButton}>{!imgInput ? <>upload</> : <>cancel</>}</button>
-                {imgInput && <>
-                    <form onSubmit={submitImgURL}>
-                        <input onChange={(e) => { setImgUrl(e.target.value) }} value={imgUrl} type="text" placeholder='ImageURL' />
-                        <button onClick={() => { setImgInput(false) }}>Submit</button>
-                    </form>
-
-                </>} */}
             </>
             }
             {user && <>
@@ -135,11 +125,17 @@ const Profile = ({ allPosts, setAllPosts }) => {
                 <AddIcon style={{ margin: '5px 10px 5px' }} />
             </div>
             <h1>saved</h1>
-            <div className='saved-posts-container'>
-                <div className='saved-post'>
-                    <p>postlist</p>
-                </div>
-            </div>
+            {user && <div className='home-posts'>
+                {
+                    user.favorites.map(post => {
+                        return (
+                            <>
+                                <Post key={post._id} post={post} allPosts={allPosts} setAllPosts={setAllPosts} />
+                            </>
+                        )
+                    })
+                }
+            </div>}
             <hr />
             <h2>Your Posts</h2>
             <div className='home-posts'>
