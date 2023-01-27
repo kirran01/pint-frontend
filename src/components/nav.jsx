@@ -83,9 +83,10 @@ const Nav = ({ allPosts, setAllPosts, updatePosts }) => {
                 {isLoggedIn && <>
                     <NotificationsIcon className="nav-icon" />
                     <Link to='/profile'>
-                        {user&& !user.profileImage && <div style={{height:'5px'}}></div>}
+                        {!user && <div style={{ height: '5px' }}></div>}
+                        {user && !user.profileImage && <div style={{ height: '5px' }}></div>}
                         {
-                           user && user.profileImage ? <>
+                            user && user.profileImage ? <>
                                 <div className='profile-image-container-comment nav-icon'>
                                     <img className='profile-image-comment' src={user.profileImage} alt="profile-image" />
                                 </div>

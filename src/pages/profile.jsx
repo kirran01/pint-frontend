@@ -7,8 +7,12 @@ import AlignHorizontalLeftIcon from '@mui/icons-material/AlignHorizontalLeft';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { AuthContext } from '../context/auth.context';
 import { useState, useContext, useEffect } from 'react';
+import { Logout } from '@mui/icons-material';
+import { useNavigate } from "react-router-dom";
 
-const Profile = ({ allPosts, setAllPosts }) => {
+const Profile = ({ allPosts, setAllPosts, setFilteredPosts }) => {
+    console.log(allPosts, 'ap')
+    const navigate = useNavigate();
     function openModal() {
         setIsOpen(true);
     }
@@ -26,7 +30,7 @@ const Profile = ({ allPosts, setAllPosts }) => {
         },
     }
     const [modalIsOpen, setIsOpen] = useState(false);
-    const { storeToken, user, setUser, authenticateUser,logOut } = useContext(AuthContext)
+    const { storeToken, user, setUser, authenticateUser, logOut } = useContext(AuthContext)
     const [usersPosts, setUsersPosts] = useState([])
     const [createdOrSaved, setCreatedOrSaved] = useState('')
     const [fieldToEdit, setFieldToEdit] = useState('')
@@ -34,7 +38,6 @@ const Profile = ({ allPosts, setAllPosts }) => {
     const [userEditInput, setUserEditInput] = useState('')
     const [imgInput, setImgInput] = useState(false)
     const [imgUrl, setImgUrl] = useState('')
-    console.log(user,'u')
     const handleUploadButton = () => {
         if (imgInput) {
             setImgInput(false)
@@ -89,6 +92,12 @@ const Profile = ({ allPosts, setAllPosts }) => {
         })
             .then(res => {
                 console.log(res, 'res')
+                const filteredAfterDelete = allPosts.filter(post => post.owner !== user._id);
+                setFilteredPosts(filteredAfterDelete)
+                setExtendEdit(false)
+                closeModal()
+                navigate('/')
+                logOut()
             })
             .catch(err => {
                 console.log(err)

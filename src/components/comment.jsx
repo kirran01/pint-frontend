@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
+import { Link, useNavigate } from 'react-router-dom';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -12,6 +13,7 @@ const Comment = ({ post, setPost, comment }) => {
     const [openEditInput, setOpenEditInput] = useState(false)
     const [newComment, setNewComment] = useState('')
     const [errorMessage, setErrorMessage] = useState(false);
+    console.log(comment, 'c')
     const flashError = () => {
         setOpenEdit(false)
         setErrorMessage(true);
@@ -19,7 +21,7 @@ const Comment = ({ post, setPost, comment }) => {
             setErrorMessage(false);
         }, 2000);
     };
-    
+
     const submitEditedComment = (e) => {
         e.preventDefault()
         axios.put(`http://localhost:3000/comments/update-comment/${comment._id}`, {
@@ -69,9 +71,11 @@ const Comment = ({ post, setPost, comment }) => {
                 <div style={{ display: 'flex', alignItems: 'flex-start', marginTop: '2px' }}>
                     {
                         comment.owner.profileImage ? <>
-                            <div className='profile-image-container-comment'>
-                                <img className='profile-image-comment' src={comment.owner.profileImage} alt="profile-image" />
-                            </div>
+                            <Link to={'/user/' + comment.owner._id}>
+                                <div className='profile-image-container-comment'>
+                                    <img className='profile-image-comment' src={comment.owner.profileImage} alt="profile-image" />
+                                </div>
+                            </Link>
                         </> :
                             <AccountCircleIcon />
                     }
