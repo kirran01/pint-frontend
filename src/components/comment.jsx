@@ -13,7 +13,6 @@ const Comment = ({ post, setPost, comment }) => {
     const [openEditInput, setOpenEditInput] = useState(false)
     const [newComment, setNewComment] = useState('')
     const [errorMessage, setErrorMessage] = useState(false);
-    console.log(comment, 'c')
     const flashError = () => {
         setOpenEdit(false)
         setErrorMessage(true);

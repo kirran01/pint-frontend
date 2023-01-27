@@ -11,7 +11,6 @@ import { Logout } from '@mui/icons-material';
 import { useNavigate } from "react-router-dom";
 
 const Profile = ({ allPosts, setAllPosts, setFilteredPosts }) => {
-    console.log(allPosts, 'ap')
     const navigate = useNavigate();
     function openModal() {
         setIsOpen(true);
@@ -36,15 +35,7 @@ const Profile = ({ allPosts, setAllPosts, setFilteredPosts }) => {
     const [fieldToEdit, setFieldToEdit] = useState('')
     const [extendEdit, setExtendEdit] = useState(false)
     const [userEditInput, setUserEditInput] = useState('')
-    const [imgInput, setImgInput] = useState(false)
-    const [imgUrl, setImgUrl] = useState('')
-    const handleUploadButton = () => {
-        if (imgInput) {
-            setImgInput(false)
-        } else {
-            setImgInput(true)
-        }
-    }
+    console.log(user,'u')
     useEffect(() => {
         if (user) {
             const headers = {
@@ -184,7 +175,7 @@ const Profile = ({ allPosts, setAllPosts, setFilteredPosts }) => {
                 <AlignHorizontalLeftIcon style={{ margin: '5px 10px 5px' }} />
                 <AddIcon style={{ margin: '5px 10px 5px' }} />
             </div>
-            <h1>saved</h1>
+            <h1>Saved</h1>
             {user && <div className='home-posts'>
                 {
                     user.favorites.map(post => {

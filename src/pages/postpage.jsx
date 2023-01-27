@@ -12,11 +12,8 @@ import { AuthContext } from '../context/auth.context';
 const Postpage = () => {
     const { id } = useParams();
     const [post, setPost] = useState(null)
-    const [favorited, setFavorited] = useState()
     const { storeToken, user, setUser, authenticateUser } = useContext(AuthContext)
     const [commentInput, setCommentInput] = useState('')
-    console.log(post, "p")
-
     const removeFromFavorites = (e) => {
         e.preventDefault()
         axios.delete(`http://localhost:3000/posts/delete-favorite/${post._id}`, {
@@ -25,7 +22,8 @@ const Postpage = () => {
             }
         })
             .then(res => {
-                console.log(res.data)
+                console.log(res.data,'rd')
+                setUser(res.data)
             })
             .catch(err => {
                 console.log(err)
@@ -43,6 +41,7 @@ const Postpage = () => {
         })
             .then(res => {
                 console.log(res.data)
+                setUser(res.data)
             })
             .catch(err => {
                 console.log(err)
