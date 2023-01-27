@@ -26,7 +26,7 @@ const Profile = ({ allPosts, setAllPosts }) => {
         },
     }
     const [modalIsOpen, setIsOpen] = useState(false);
-    const { storeToken, user, setUser, authenticateUser } = useContext(AuthContext)
+    const { storeToken, user, setUser, authenticateUser,logOut } = useContext(AuthContext)
     const [usersPosts, setUsersPosts] = useState([])
     const [createdOrSaved, setCreatedOrSaved] = useState('')
     const [fieldToEdit, setFieldToEdit] = useState('')
@@ -34,6 +34,7 @@ const Profile = ({ allPosts, setAllPosts }) => {
     const [userEditInput, setUserEditInput] = useState('')
     const [imgInput, setImgInput] = useState(false)
     const [imgUrl, setImgUrl] = useState('')
+    console.log(user,'u')
     const handleUploadButton = () => {
         if (imgInput) {
             setImgInput(false)

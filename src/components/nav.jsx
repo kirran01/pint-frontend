@@ -83,8 +83,9 @@ const Nav = ({ allPosts, setAllPosts, updatePosts }) => {
                 {isLoggedIn && <>
                     <NotificationsIcon className="nav-icon" />
                     <Link to='/profile'>
+                        {user&& !user.profileImage && <div style={{height:'5px'}}></div>}
                         {
-                            user.profileImage ? <>
+                           user && user.profileImage ? <>
                                 <div className='profile-image-container-comment nav-icon'>
                                     <img className='profile-image-comment' src={user.profileImage} alt="profile-image" />
                                 </div>
@@ -99,6 +100,7 @@ const Nav = ({ allPosts, setAllPosts, updatePosts }) => {
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
                 style={customStyles2}
+                ariaHideApp={false}
             >
                 <Signupform closeModal={closeModal} />
             </Modal>
@@ -106,6 +108,7 @@ const Nav = ({ allPosts, setAllPosts, updatePosts }) => {
                 style={customStyles}
                 isOpen={modalIsOpen2}
                 onRequestClose={closeModal2}
+                ariaHideApp={false}
             >
                 <Loginform closeModal2={closeModal2} />
             </Modal>

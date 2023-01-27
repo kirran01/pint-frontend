@@ -15,6 +15,7 @@ const Postpage = () => {
     const [favorited, setFavorited] = useState()
     const { storeToken, user, setUser, authenticateUser } = useContext(AuthContext)
     const [commentInput, setCommentInput] = useState('')
+    console.log(post, "p")
 
     const removeFromFavorites = (e) => {
         e.preventDefault()
