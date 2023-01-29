@@ -31,11 +31,10 @@ const Profile = ({ allPosts, setAllPosts, setFilteredPosts }) => {
     const [modalIsOpen, setIsOpen] = useState(false);
     const { storeToken, user, setUser, authenticateUser, logOut } = useContext(AuthContext)
     const [usersPosts, setUsersPosts] = useState([])
-    const [createdOrSaved, setCreatedOrSaved] = useState('')
+    const [createdOrSaved, setCreatedOrSaved] = useState('created')
     const [fieldToEdit, setFieldToEdit] = useState('')
     const [extendEdit, setExtendEdit] = useState(false)
     const [userEditInput, setUserEditInput] = useState('')
-    console.log(user,'u')
     useEffect(() => {
         if (user) {
             const headers = {
@@ -168,15 +167,15 @@ const Profile = ({ allPosts, setAllPosts, setFilteredPosts }) => {
 
             </div>
             <div style={{ display: 'flex' }}>
-                <p onClick={() => { setCreatedOrSaved('created') }} style={{ margin: '5px 10px 5px' }}>Created</p>
-                <p onClick={() => { setCreatedOrSaved('saved') }} style={{ margin: '5px 10px 5px' }}>Saved</p>
+                <p onClick={() => { setCreatedOrSaved('created') }} style={{ margin: '5px 10px 5px', cursor: 'pointer' }}>Created</p>
+                <p onClick={() => { setCreatedOrSaved('saved') }} style={{ margin: '5px 10px 5px', cursor: 'pointer' }}>Saved</p>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
                 <AlignHorizontalLeftIcon style={{ margin: '5px 10px 5px' }} />
                 <AddIcon style={{ margin: '5px 10px 5px' }} />
             </div>
-            <h1>Saved</h1>
-            {user && <div className='home-posts'>
+            {createdOrSaved === 'saved' && <h1>Saved</h1>}
+            {user && createdOrSaved==='saved' &&<div className='home-posts'>
                 {
                     user.favorites.map(post => {
                         return (
@@ -187,10 +186,10 @@ const Profile = ({ allPosts, setAllPosts, setFilteredPosts }) => {
                     })
                 }
             </div>}
-            <hr />
-            <h2>Your Posts</h2>
+            {/* <hr /> */}
+            {createdOrSaved === 'created' && <h2>Your Posts</h2>}
             <div className='home-posts'>
-                {usersPosts.map(post => {
+                {createdOrSaved==='created' && usersPosts.map(post => {
                     return (
                         <>
                             <Post key={post._id} post={post} allPosts={allPosts} setAllPosts={setAllPosts} />
