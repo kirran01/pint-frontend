@@ -35,6 +35,7 @@ const Profile = ({ allPosts, setAllPosts, setFilteredPosts }) => {
     const [fieldToEdit, setFieldToEdit] = useState('')
     const [extendEdit, setExtendEdit] = useState(false)
     const [userEditInput, setUserEditInput] = useState('')
+    const [deleteInput, setDeleteInput] = useState('')
     useEffect(() => {
         if (user) {
             const headers = {
@@ -75,23 +76,28 @@ const Profile = ({ allPosts, setAllPosts, setFilteredPosts }) => {
     }
     const deleteUser = (e) => {
         e.preventDefault()
-        axios.delete(`http://localhost:3000/auth/delete-user/${user._id}`, {
-            headers: {
-                authorization: `Bearer ${localStorage.getItem('authToken')}`
-            }
-        })
+        if (deleteInput === 'delete') {
+            axios.delete(`http://localhost:3000/auth/delete-user/${user._id}`, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('authToken')}`
+                }
+            })
             .then(res => {
                 console.log(res, 'res')
                 const filteredAfterDelete = allPosts.filter(post => post.owner !== user._id);
                 setFilteredPosts(filteredAfterDelete)
                 setExtendEdit(false)
                 closeModal()
+                setDeleteInput('')
                 navigate('/')
                 logOut()
             })
             .catch(err => {
                 console.log(err)
             })
+        } else {
+            console.log('input not matching')
+        }
     }
     return (
         <div className='profile-page'>
@@ -175,7 +181,7 @@ const Profile = ({ allPosts, setAllPosts, setFilteredPosts }) => {
                 <AddIcon style={{ margin: '5px 10px 5px' }} />
             </div>
             {createdOrSaved === 'saved' && <h1>Saved</h1>}
-            {user && createdOrSaved==='saved' &&<div className='home-posts'>
+            {user && createdOrSaved === 'saved' && <div className='home-posts'>
                 {
                     user.favorites.map(post => {
                         return (
@@ -189,7 +195,7 @@ const Profile = ({ allPosts, setAllPosts, setFilteredPosts }) => {
             {/* <hr /> */}
             {createdOrSaved === 'created' && <h2>Your Posts</h2>}
             <div className='home-posts'>
-                {createdOrSaved==='created' && usersPosts.map(post => {
+                {createdOrSaved === 'created' && usersPosts.map(post => {
                     return (
                         <>
                             <Post key={post._id} post={post} allPosts={allPosts} setAllPosts={setAllPosts} />
@@ -206,8 +212,8 @@ const Profile = ({ allPosts, setAllPosts, setFilteredPosts }) => {
             >
                 <div style={{ display: 'flex', flexDirection: 'column' }} >
                     <h3>Are you sure you want to Delete your Account?</h3>
-                    <form onSubmit={deleteUser} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                        <input type="text" placeholder='type DELETE' />
+                    <form onChange={(e) => { setDeleteInput(e.target.value) }} value={deleteInput} onSubmit={deleteUser} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                        <input type="text" placeholder='DELETE' />
                         <button>Confirm</button>
                     </form>
                 </div>

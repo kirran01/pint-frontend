@@ -22,7 +22,6 @@ const Postpage = () => {
             }
         })
             .then(res => {
-                console.log(res.data,'rd')
                 setUser(res.data)
             })
             .catch(err => {
@@ -106,7 +105,7 @@ const Postpage = () => {
                                 <ExpandMoreIcon />
                             </div>
                             {user && post && <p style={{ cursor: 'pointer' }} onClick={(e) => { checkForId(post._id) }} id='save-button'>Save</p>}
-                            {user && <button onClick={removeFromFavorites}>remove</button>}
+                            {user && <button onClick={removeFromFavorites}>remove</button>}                           
                         </div>
                     </div>
                     <div className='post-page-content-link'>
@@ -119,7 +118,7 @@ const Postpage = () => {
                     <div className='post-page-content-profile'></div>
                     <div className='post-page-content-comments'>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
-                            <h3>comments</h3>
+                            <h3>Comments</h3>
                             <ExpandMoreIcon />
                         </div>
                         <div className='comments'>
