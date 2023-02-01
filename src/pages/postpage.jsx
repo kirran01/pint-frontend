@@ -28,8 +28,6 @@ const Postpage = () => {
                 console.log(err)
             })
     }
-    console.log(user,'u')
-
     const addToFavorites = (e) => {
         // e.preventDefault()
         axios.put('http://localhost:3000/posts/add-favorite', {
@@ -47,16 +45,14 @@ const Postpage = () => {
                 console.log(err)
             })
     }
-    function checkForId() {
+    const isFavorited = () => {
         const object = user.favorites.find(favorite => favorite._id === id);
         if (object) {
-            console.log(`Object found with id ${id}`);
+            return true
         } else {
-            addToFavorites()
-            console.log(`Object with id ${id} not found`);
+            return false
         }
     }
-
     const handleCommentInput = (e) => {
         setCommentInput(e.target.value)
     }
@@ -105,8 +101,8 @@ const Postpage = () => {
                                 <p id="profile-button">Profile</p>
                                 <ExpandMoreIcon />
                             </div>
-                            {user && post && <p style={{ cursor: 'pointer' }} onClick={(e) => { checkForId(post._id) }} id='save-button'>Save</p>}
-                            {user && <button onClick={removeFromFavorites}>remove</button>}                           
+                            {user && post && isFavorited() && <p onClick={removeFromFavorites} style={{ cursor: 'pointer', backgroundColor: 'black' }} id='save-button'>Saved</p>}
+                            {user && !isFavorited() && <button onClick={addToFavorites}>Save</button>}
                         </div>
                     </div>
                     <div className='post-page-content-link'>
