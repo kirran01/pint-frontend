@@ -2,7 +2,8 @@ import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
 
-const Signupform = ({closeModal}) => {
+const Signupform = ({ closeModal }) => {
+    const [errMessage, setErrMessage] = useState('')
     const [signUpInput, setSignUpInput] = useState({
         signUpEmail: '',
         signUpPassword: '',
@@ -24,7 +25,9 @@ const Signupform = ({closeModal}) => {
                 closeModal()
             })
             .catch(err => {
-                console.log(err)
+                console.log(err, "errsignup")
+                setErrMessage(err.response.data.message)
+
             })
     }
     return (
@@ -33,7 +36,8 @@ const Signupform = ({closeModal}) => {
                 <img style={{ height: '32px' }} src="../../public/img/pint.png" alt="img" />
             </div>
             <h2>Welcome to Pintrest</h2>
-            <h3>Find new ideas to try</h3>
+            {errMessage&&<h4>{errMessage}</h4>}
+            {<h3>Find new ideas to try</h3>}
             <form className='login-form' onSubmit={submitSignUp}>
                 <div className='input-info-outer'>
                     <div className='input-info'>

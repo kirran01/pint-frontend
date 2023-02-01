@@ -28,6 +28,7 @@ const Postpage = () => {
                 console.log(err)
             })
     }
+    console.log(user,'u')
 
     const addToFavorites = (e) => {
         // e.preventDefault()
@@ -46,7 +47,7 @@ const Postpage = () => {
                 console.log(err)
             })
     }
-    function checkForId(id) {
+    function checkForId() {
         const object = user.favorites.find(favorite => favorite._id === id);
         if (object) {
             console.log(`Object found with id ${id}`);

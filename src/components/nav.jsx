@@ -48,7 +48,7 @@ const Nav = ({ allPosts, setAllPosts, updatePosts }) => {
             bottom: 'auto',
             borderRadius: '30px',
             transform: 'translate(-50%, -50%)',
-            marginTop: '25px'
+            marginTop: '30px'
         },
     }
     const [modalIsOpen2, setIsOpen2] = useState(false);
