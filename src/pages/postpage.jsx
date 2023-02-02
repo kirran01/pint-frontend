@@ -14,11 +14,9 @@ const Postpage = ({ filteredPosts, setFilteredPosts }) => {
     const { id } = useParams();
     const [post, setPost] = useState(null)
     const [open, setOpen] = useState('')
-    const [errorMessage, setErrorMessage] = useState('')
+    const [errorMessage, setErrorMessage] = useState('Delete')
     const { storeToken, user, setUser, authenticateUser } = useContext(AuthContext)
     const [commentInput, setCommentInput] = useState('')
-    console.log(user, 'u')
-    console.log(errorMessage, 'em')
     const removeFromFavorites = (e) => {
         e.preventDefault()
         axios.delete(`http://localhost:3000/posts/delete-favorite/${post._id}`, {
@@ -101,7 +99,7 @@ const Postpage = ({ filteredPosts, setFilteredPosts }) => {
                 if (res.data === 'Unauthorized') {
                     setErrorMessage(res.data)
                     setTimeout(() => {
-                        setErrorMessage('')
+                        setErrorMessage('Delete')
                     }, 1500);
                 }
             })
@@ -129,7 +127,7 @@ const Postpage = ({ filteredPosts, setFilteredPosts }) => {
                                 </Link>}
                                 <ExpandMoreIcon onClick={() => { setOpen('delete') }} />
                                 {open === 'delete' && <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                    <button onClick={deletePost} style={{padding: '10px 20px 10px', border: 'none', borderRadius: '10px', margin: '2px'}}>Delete </button>
+                                    <button onClick={deletePost} style={{padding: '10px 20px 10px', border: 'none', borderRadius: '10px', margin: '2px'}}>{errorMessage}</button>
                                     <button onClick={() => { setOpen('') }} style={{ padding: '10px 20px 10px', border: 'none', borderRadius: '10px', margin: '2px' }}>Cancel</button>
                                 </div>}
                             </div>
