@@ -13,10 +13,12 @@ import { AuthContext } from '../context/auth.context';
 const Postpage = ({ filteredPosts, setFilteredPosts }) => {
     const { id } = useParams();
     const [post, setPost] = useState(null)
+    const [open, setOpen] = useState('')
+    const [errorMessage, setErrorMessage] = useState('')
     const { storeToken, user, setUser, authenticateUser } = useContext(AuthContext)
     const [commentInput, setCommentInput] = useState('')
-    const [owner, setOwner] = useState('')
-
+    console.log(user, 'u')
+    console.log(errorMessage, 'em')
     const removeFromFavorites = (e) => {
         e.preventDefault()
         axios.delete(`http://localhost:3000/posts/delete-favorite/${post._id}`, {
@@ -86,6 +88,27 @@ const Postpage = ({ filteredPosts, setFilteredPosts }) => {
                 console.log(err)
             })
     }
+    const deletePost = (e) => {
+        e.preventDefault()
+        console.log('deletepost')
+        axios.delete(`http://localhost:3000/posts/delete-post/${id}`, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('authToken')}`
+            }
+        })
+            .then(res => {
+                console.log(res.data, 'rd')
+                if (res.data === 'Unauthorized') {
+                    setErrorMessage(res.data)
+                    setTimeout(() => {
+                        setErrorMessage('')
+                    }, 1500);
+                }
+            })
+            .catch(err => {
+                console.log(err, 'errdelp')
+            })
+    }
     return (
         <div className='post-page'>
             <div className='post-page-content-card'>
@@ -104,11 +127,14 @@ const Postpage = ({ filteredPosts, setFilteredPosts }) => {
                                 {post && <Link to={'/user/' + post.owner._id}>
                                     <p id="profile-button">Profile</p>
                                 </Link>}
-
-                                <ExpandMoreIcon />
+                                <ExpandMoreIcon onClick={() => { setOpen('delete') }} />
+                                {open === 'delete' && <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                    <button onClick={deletePost} style={{padding: '10px 20px 10px', border: 'none', borderRadius: '10px', margin: '2px'}}>Delete </button>
+                                    <button onClick={() => { setOpen('') }} style={{ padding: '10px 20px 10px', border: 'none', borderRadius: '10px', margin: '2px' }}>Cancel</button>
+                                </div>}
                             </div>
                             {user && post && isFavorited() && <p onClick={removeFromFavorites} style={{ cursor: 'pointer', backgroundColor: 'black' }} id='save-button'>Saved</p>}
-                            {user && !isFavorited() && <p id='save-button' style={{ padding: '' }} onClick={addToFavorites}>Save</p>}
+                            {user && !isFavorited() && <p id='save-button' style={{ cursor: 'pointer' }} onClick={addToFavorites}>Save</p>}
                         </div>
                     </div>
                     <div className='post-page-content-link'>
