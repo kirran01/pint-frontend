@@ -3,17 +3,20 @@ import axios from 'axios';
 import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import UploadIcon from '@mui/icons-material/Upload';
+import { Link, useNavigate } from 'react-router-dom';
 import LinkIcon from '@mui/icons-material/Link';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Comment from '../components/comment';
 import { AuthContext } from '../context/auth.context';
 
-const Postpage = () => {
+const Postpage = ({ filteredPosts, setFilteredPosts }) => {
     const { id } = useParams();
     const [post, setPost] = useState(null)
     const { storeToken, user, setUser, authenticateUser } = useContext(AuthContext)
     const [commentInput, setCommentInput] = useState('')
+    const [owner, setOwner] = useState('')
+
     const removeFromFavorites = (e) => {
         e.preventDefault()
         axios.delete(`http://localhost:3000/posts/delete-favorite/${post._id}`, {
@@ -98,11 +101,14 @@ const Postpage = () => {
                         </div>
                         <div className='post-page-content-icons-buttons'>
                             <div style={{ display: 'flex', alignItems: 'center' }}>
-                                <p id="profile-button">Profile</p>
+                                {post && <Link to={'/user/' + post.owner._id}>
+                                    <p id="profile-button">Profile</p>
+                                </Link>}
+
                                 <ExpandMoreIcon />
                             </div>
                             {user && post && isFavorited() && <p onClick={removeFromFavorites} style={{ cursor: 'pointer', backgroundColor: 'black' }} id='save-button'>Saved</p>}
-                            {user && !isFavorited() && <p id='save-button' style={{padding:''}} onClick={addToFavorites}>Save</p>}
+                            {user && !isFavorited() && <p id='save-button' style={{ padding: '' }} onClick={addToFavorites}>Save</p>}
                         </div>
                     </div>
                     <div className='post-page-content-link'>
