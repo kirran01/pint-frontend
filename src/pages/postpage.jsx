@@ -102,7 +102,7 @@ const Postpage = () => {
                                 <ExpandMoreIcon />
                             </div>
                             {user && post && isFavorited() && <p onClick={removeFromFavorites} style={{ cursor: 'pointer', backgroundColor: 'black' }} id='save-button'>Saved</p>}
-                            {user && !isFavorited() && <button onClick={addToFavorites}>Save</button>}
+                            {user && !isFavorited() && <p id='save-button' style={{padding:''}} onClick={addToFavorites}>Save</p>}
                         </div>
                     </div>
                     <div className='post-page-content-link'>
