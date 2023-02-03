@@ -38,7 +38,7 @@ const Signupform = ({ closeModal }) => {
             <h2>Welcome to Pintrest</h2>
             {errMessage&&<h4>{errMessage}</h4>}
             {<h3>Find new ideas to try</h3>}
-            <form className='login-form' onSubmit={submitSignUp}>
+            <form  style={{margin:'10px 100px 10px'}} className='login-form' onSubmit={submitSignUp}>
                 <div className='input-info-outer'>
                     <div className='input-info'>
                         <h4 htmlFor="email2">Email</h4>
@@ -72,14 +72,14 @@ const Signupform = ({ closeModal }) => {
                         <h4>Continue with Google</h4>
                     </div>
                 </button>
-                <div className='terms'>
+                {/* <div className='terms'>
                     <h6>By continuing you agree to Kintrest's Terms Of Service and acknowledge you've read our Privacy Policy. Notice at collection.</h6>
                 </div>
                 <hr />
                 <div className='end-terms'>
                     <h6>Not on pintrest yet? Sign up</h6>
                     <h6>Are you a business? Get started here!</h6>
-                </div>
+                </div> */}
             </form>
         </div>
     );

@@ -37,6 +37,8 @@ const Nav = ({ allPosts, setAllPosts, updatePosts }) => {
             bottom: 'auto',
             borderRadius: '30px',
             transform: 'translate(-50%, -50%)',
+            marginTop:'35px',
+            zIndex:1
         },
     }
 
@@ -48,7 +50,8 @@ const Nav = ({ allPosts, setAllPosts, updatePosts }) => {
             bottom: 'auto',
             borderRadius: '30px',
             transform: 'translate(-50%, -50%)',
-            marginTop: '30px'
+            zIndex:1,
+            marginTop:'35px'
         },
     }
     const [modalIsOpen2, setIsOpen2] = useState(false);
