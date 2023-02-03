@@ -4,7 +4,7 @@ import { useEffect, useState, useContext } from 'react';
 const Post = ({ allPosts, setAllPosts, post }) => {
 
     return (
-        <div>
+        <div style={{margin:'5px'}}>
             <div>
                 <Link to={'/post/' + post._id}>
                     <img src={post.image} alt="post" />

@@ -11,6 +11,7 @@ import Comment from '../components/comment';
 import { AuthContext } from '../context/auth.context';
 
 const Postpage = ({ filteredPosts, setFilteredPosts }) => {
+    const navigate = useNavigate();
     const { id } = useParams();
     const [post, setPost] = useState(null)
     const [open, setOpen] = useState('')
@@ -101,7 +102,10 @@ const Postpage = ({ filteredPosts, setFilteredPosts }) => {
                     setTimeout(() => {
                         setErrorMessage('Delete')
                     }, 1500);
+                } else {
+                    navigate('/')
                 }
+
             })
             .catch(err => {
                 console.log(err, 'errdelp')
@@ -127,7 +131,7 @@ const Postpage = ({ filteredPosts, setFilteredPosts }) => {
                                 </Link>}
                                 <ExpandMoreIcon onClick={() => { setOpen('delete') }} />
                                 {open === 'delete' && <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                    <button onClick={deletePost} style={{padding: '10px 20px 10px', border: 'none', borderRadius: '10px', margin: '2px'}}>{errorMessage}</button>
+                                    <button onClick={deletePost} style={{ padding: '10px 20px 10px', border: 'none', borderRadius: '10px', margin: '2px' }}>{errorMessage}</button>
                                     <button onClick={() => { setOpen('') }} style={{ padding: '10px 20px 10px', border: 'none', borderRadius: '10px', margin: '2px' }}>Cancel</button>
                                 </div>}
                             </div>

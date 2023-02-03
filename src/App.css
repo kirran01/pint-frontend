@@ -25,6 +25,7 @@
 #searchbarId.searchbar{
   margin: 5px 5px 5px;
   padding-left: 40px;
+  min-width: 40px;
 }
 .nav ul{
 display:flex;
@@ -265,7 +266,7 @@ margin: 10px;
 
 .home-posts{
  margin:90px 40px 0px;
- columns: 6 240px;
+ columns: 7 220px;
 }
 
 .home-posts h6{

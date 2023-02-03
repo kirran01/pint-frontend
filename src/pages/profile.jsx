@@ -82,19 +82,19 @@ const Profile = ({ allPosts, setAllPosts, setFilteredPosts }) => {
                     authorization: `Bearer ${localStorage.getItem('authToken')}`
                 }
             })
-            .then(res => {
-                console.log(res, 'res')
-                const filteredAfterDelete = allPosts.filter(post => post.owner !== user._id);
-                setFilteredPosts(filteredAfterDelete)
-                setExtendEdit(false)
-                closeModal()
-                setDeleteInput('')
-                navigate('/')
-                logOut()
-            })
-            .catch(err => {
-                console.log(err)
-            })
+                .then(res => {
+                    console.log(res, 'res')
+                    const filteredAfterDelete = allPosts.filter(post => post.owner !== user._id);
+                    setFilteredPosts(filteredAfterDelete)
+                    setExtendEdit(false)
+                    closeModal()
+                    setDeleteInput('')
+                    navigate('/')
+                    logOut()
+                })
+                .catch(err => {
+                    console.log(err)
+                })
         } else {
             console.log('input not matching')
         }
@@ -149,26 +149,26 @@ const Profile = ({ allPosts, setAllPosts, setFilteredPosts }) => {
                 </>}
 
             </>}
-            <div style={{ display: 'flex' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                 {!extendEdit ? <button style={{ margin: '5px' }}>Share</button>
                     :
-                    <button onClick={openModal} style={{ backgroundColor: 'red', color: 'white' }}>Delete</button>
+                    <button onClick={openModal} style={{ backgroundColor: 'red', color: 'white',margin:'2px'}}>Delete</button>
                 }
                 {!extendEdit && <button onClick={() => { setExtendEdit(true) }} style={{ margin: '5px' }}>Edit Profile</button>}
                 {extendEdit && <>
-                    <button onClick={() => {
+                    <button style={{margin:'2px'}} onClick={() => {
                         setFieldToEdit('username')
                         setExtendEdit(false)
                     }}>Edit Username</button>
-                    <button onClick={() => {
+                    <button style={{margin:'2px'}} onClick={() => {
                         setFieldToEdit('email')
                         setExtendEdit(false)
                     }}>Edit Email</button>
-                    <button onClick={() => {
+                    <button style={{margin:'2px'}} onClick={() => {
                         setFieldToEdit('profileImage')
                         setExtendEdit(false)
                     }}>Change Picture</button>
-                    <button onClick={() => { setExtendEdit(false) }}>Cancel</button>
+                    <button style={{margin:'2px'}} onClick={() => { setExtendEdit(false) }}>Cancel</button>
                 </>}
 
             </div>
