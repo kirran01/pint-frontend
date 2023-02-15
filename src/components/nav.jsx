@@ -11,6 +11,7 @@ import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Searchbar from './searchbar';
+import PintLogo from '../../public/img/pint.png'
 
 
 
@@ -37,8 +38,8 @@ const Nav = ({ allPosts, setAllPosts, updatePosts }) => {
             bottom: 'auto',
             borderRadius: '30px',
             transform: 'translate(-50%, -50%)',
-            marginTop:'35px',
-            zIndex:1
+            marginTop: '35px',
+            zIndex: 1
         },
     }
 
@@ -50,8 +51,8 @@ const Nav = ({ allPosts, setAllPosts, updatePosts }) => {
             bottom: 'auto',
             borderRadius: '30px',
             transform: 'translate(-50%, -50%)',
-            zIndex:1,
-            marginTop:'35px'
+            zIndex: 1,
+            marginTop: '35px'
         },
     }
     const [modalIsOpen2, setIsOpen2] = useState(false);
@@ -59,7 +60,7 @@ const Nav = ({ allPosts, setAllPosts, updatePosts }) => {
         <nav className='nav'>
             <div className='pintrest-logo'>
                 <Link to="/">
-                    <img style={{ height: '32px' }} src="../../public/img/pint.png" alt="img" />
+                    <img style={{ height: '32px' }} src={PintLogo} alt="img" />
                 </Link>
             </div>
             <ul>

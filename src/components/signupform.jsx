@@ -1,6 +1,10 @@
 import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
+import PintLogo from '../../public/img/pint.png'
+import FbLogo from '../../public/img/facebook.png'
+import GoogLogo from  '../../public/img/google.png'
+
 
 const Signupform = ({ closeModal }) => {
     const [errMessage, setErrMessage] = useState('')
@@ -15,7 +19,7 @@ const Signupform = ({ closeModal }) => {
 
     const submitSignUp = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:3000/auth/signup', {
+        axios.post(`${import.meta.env.VITE_API_URL}/auth/signup`, {
             email: signUpInput.signUpEmail,
             password: signUpInput.signUpPassword,
             username: signUpInput.signUpName
@@ -33,7 +37,7 @@ const Signupform = ({ closeModal }) => {
     return (
         <div className='login-component'>
             <div className='pintrest-logo'>
-                <img style={{ height: '32px' }} src="../../public/img/pint.png" alt="img" />
+                <img style={{ height: '32px' }} src={PintLogo} alt="img" />
             </div>
             <h2>Welcome to Pintrest</h2>
             {errMessage&&<h4>{errMessage}</h4>}
@@ -56,7 +60,7 @@ const Signupform = ({ closeModal }) => {
                 <button id='facebook-login-button'>
                     <div className='facebook-login-button-content'>
                         <span>
-                            <img style={{ height: '20px' }} src="../../public/img/facebook.png" alt="" />
+                            <img style={{ height: '20px' }} src={FbLogo} alt="" />
                         </span>
                         <h4>Continue with Facebook</h4>
                     </div>
@@ -66,20 +70,12 @@ const Signupform = ({ closeModal }) => {
                     <div className='google-login-button-content'>
 
                         <span>
-                            <img style={{ height: '20px' }} src="../../public/img/google.png" alt="" />
+                            <img style={{ height: '20px' }} src={GoogLogo} alt="" />
                         </span>
 
                         <h4>Continue with Google</h4>
                     </div>
                 </button>
-                {/* <div className='terms'>
-                    <h6>By continuing you agree to Kintrest's Terms Of Service and acknowledge you've read our Privacy Policy. Notice at collection.</h6>
-                </div>
-                <hr />
-                <div className='end-terms'>
-                    <h6>Not on pintrest yet? Sign up</h6>
-                    <h6>Are you a business? Get started here!</h6>
-                </div> */}
             </form>
         </div>
     );

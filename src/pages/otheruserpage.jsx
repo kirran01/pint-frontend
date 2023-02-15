@@ -12,7 +12,7 @@ const OtherUserPage = ({ setFilteredPosts }) => {
     const [theUser, setTheUser] = useState({})
     const [userPosts, setUserPosts] = useState()
     useEffect(() => {
-        axios.get('http://localhost:3000/posts/all')
+        axios.get(`${import.meta.env.VITE_API_URL}/posts/all`)
             .then(res => {
                 let posts = res.data
                 const filteredPosts = posts.filter(post => post.owner === userId)
@@ -25,44 +25,43 @@ const OtherUserPage = ({ setFilteredPosts }) => {
     useEffect(() => {
         axios.get(`http://localhost:3000/auth/get-user/${userId}`, {
             headers: {
-                authorization: `Bearer ${localStorage.getItem('authToken')}`
-            }
+            authorization: `Bearer ${localStorage.getItem('authToken')}`
+        }
         })
-            .then(res => {
-                console.log(res.data, 'rd')
-                setTheUser(res.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }, [])
-    console.log(theUser, 'tu')
-    return (
-        <div style={{ marginTop: '100px', display:'flex', flexDirection:'column', justifyContent:'center', alignContent:'center', alignItems:'center'}}>
-            <h1>{theUser.username}</h1>
-            {theUser.profileImage ? <>
-                <div className='profile-image-container'>
-                    <img className='profile-image' src={theUser.profileImage} alt="profile-image" />
-                </div>
-            </> : <>
-                <AccountCircleIcon sx={{ fontSize: 120 }} />
-            </>}
-            <h2>{theUser.username}'s posts</h2>
-            <div>
-                <div className='home-posts'>
-                    {userPosts &&
-                        userPosts.map(post => {
-                            return (
-                                <>
-                                    <Post post={post} />
-                                </>
-                            )
-                        })
-                    }
-                </div>
+        .then(res => {
+            console.log(res.data, 'rd')
+            setTheUser(res.data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}, [])
+return (
+    <div style={{ marginTop: '100px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignContent: 'center', alignItems: 'center' }}>
+        <h1>{theUser.username}</h1>
+        {theUser.profileImage ? <>
+            <div className='profile-image-container'>
+                <img className='profile-image' src={theUser.profileImage} alt="profile-image" />
             </div>
-        </div >
-    );
+        </> : <>
+            <AccountCircleIcon sx={{ fontSize: 120 }} />
+        </>}
+        <h2>{theUser.username}'s posts</h2>
+        <div>
+            <div className='home-posts'>
+                {userPosts &&
+                    userPosts.map(post => {
+                        return (
+                            <>
+                                <Post post={post} />
+                            </>
+                        )
+                    })
+                }
+            </div>
+        </div>
+    </div >
+);
 }
 
 export default OtherUserPage;

@@ -2,8 +2,12 @@ import React from 'react';
 import { useState, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/auth.context';
+import PintLogo from '../../public/img/pint.png'
+import FbLogo from '../../public/img/facebook.png'
+import GoogLogo from  '../../public/img/google.png'
 
-const Loginform = ({closeModal2}) => {
+
+const Loginform = ({ closeModal2 }) => {
     const { storeToken, authenticateUser } = useContext(AuthContext)
     const [loginInput, setLoginInput] = useState({
         loginUserName: '',
@@ -14,7 +18,7 @@ const Loginform = ({closeModal2}) => {
     }
     const submitLogin = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:3000/auth/login', {
+        axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, {
             username: loginInput.loginUserName,
             password: loginInput.loginPassword
         })
@@ -31,7 +35,7 @@ const Loginform = ({closeModal2}) => {
     return (
         <div className='login-component'>
             <div className='pintrest-logo'>
-                <img style={{ height: '32px' }} src="../../public/img/pint.png" alt="img" />
+                <img style={{ height: '32px' }} src={PintLogo} alt="img" />
             </div>
             <h2>Welcome to Pintrest</h2>
             <form className='login-form' onSubmit={submitLogin}>
@@ -50,7 +54,7 @@ const Loginform = ({closeModal2}) => {
                 <button id='facebook-login-button'>
                     <div className='facebook-login-button-content'>
                         <span>
-                            <img style={{ height: '20px' }} src="../../public/img/facebook.png" alt="" />
+                            <img style={{ height: '20px' }} src={FbLogo} alt="" />
                         </span>
                         <h4>Continue with Facebook</h4>
                     </div>
@@ -60,7 +64,7 @@ const Loginform = ({closeModal2}) => {
                     <div className='google-login-button-content'>
 
                         <span>
-                            <img style={{ height: '20px' }} src="../../public/img/google.png" alt="" />
+                            <img style={{ height: '20px' }} src={GoogLogo} alt="" />
                         </span>
 
                         <h4>Continue with Google</h4>

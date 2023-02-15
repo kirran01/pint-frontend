@@ -34,11 +34,11 @@ const Postpage = ({ filteredPosts, setFilteredPosts }) => {
     }
     const addToFavorites = (e) => {
         // e.preventDefault()
-        axios.put('http://localhost:3000/posts/add-favorite', {
+        axios.put(`${import.meta.env.VITE_API_URL}/posts/add-favorite`, {
             post: post._id
         }, {
             headers: {
-                authorization: `Bearer ${localStorage.getItem('authToken')}`
+                authorization: `Bearer ${ localStorage.getItem('authToken') }`
             }
         })
             .then(res => {
@@ -63,8 +63,8 @@ const Postpage = ({ filteredPosts, setFilteredPosts }) => {
     useEffect(() => {
         axios.get(`http://localhost:3000/posts/${id}`)
             .then(post => {
-                setPost(post.data)
-            })
+            setPost(post.data)
+        })
             .catch(err => {
                 console.log(err, "err")
             })

@@ -19,8 +19,7 @@ const Comment = ({ post, setPost, comment }) => {
         setTimeout(() => {
             setErrorMessage(false);
         }, 2000);
-    };
-
+    }
     const submitEditedComment = (e) => {
         e.preventDefault()
         axios.put(`http://localhost:3000/comments/update-comment/${comment._id}`, {
@@ -64,6 +63,16 @@ const Comment = ({ post, setPost, comment }) => {
             setOpenEdit(false)
         }
     }
+    console.log(comment, 'c')
+    console.log(user, 'u')
+    const isOwnComment = () => {
+        let isComment = comment.owner.username === user.username
+        if (isComment) {
+            return true
+        } else {
+            return false
+        }
+    }
     return (
         <div className='comment'>
             <div style={{ display: 'flex' }}>
@@ -96,16 +105,9 @@ const Comment = ({ post, setPost, comment }) => {
                 <h5 style={{ margin: '3px 10px 25px' }}>{new Date(post.comments[0].day).toDateString().substring(3)}</h5>
                 <h5 style={{ margin: '3px 10px 25px' }}>reply</h5>
                 <FavoriteBorderIcon />
-                <MoreHorizIcon onClick={openEditBox} />
+                {isLoggedIn && isOwnComment() && <MoreHorizIcon onClick={openEditBox} />}
                 {openEdit && <div className='edit-comment-buttons' style={{ display: 'flex', padding: '10px', flexDirection: 'column', margin: '8px' }}>
-                    <button onClick={() => {
-                        if (comment.owner._id !== user._id) {
-                            console.log('not the owner')
-                            flashError()
-                        } else {
-                            setOpenEditInput(true)
-                        }
-                    }}><p style={{ textAlign: 'left', margin: '10px' }}>Edit</p></button>
+                    <button onClick={() => { setOpenEditInput(true) }}><p style={{ textAlign: 'left', margin: '10px' }}>Edit</p></button>
                     <button onClick={deleteComment}><p style={{ textAlign: 'left', margin: '10px' }}>Delete</p></button>
                 </div>}
             </div>

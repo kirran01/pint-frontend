@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
+import UploadIcon from '../../public/img/upload.png'
 
 const Createpost = ({ allPosts, setAllPosts, filteredPosts, setFilteredPosts, updatePosts }) => {
     const { user, isLoggedIn, logOut } = useContext(AuthContext);
@@ -17,14 +18,14 @@ const Createpost = ({ allPosts, setAllPosts, filteredPosts, setFilteredPosts, up
     }
     const submitPost = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:3000/posts/create-post', {
+        axios.post(`${import.meta.env.VITE_API_URL}/posts/create-post`, {
             title: postInput.title,
             description: postInput.description,
             link: postInput.link,
             image: postInput.imageUrl
         }, {
             headers: {
-                authorization: `Bearer ${localStorage.getItem('authToken')}`
+                authorization: `Bearer ${ localStorage.getItem('authToken') }`
             }
         })
             .then(res => {
@@ -47,7 +48,7 @@ const Createpost = ({ allPosts, setAllPosts, filteredPosts, setFilteredPosts, up
             <div className='create-post-container'>
                 <div className='upload-post-container'>
                     <div className='upload-post'>
-                        <div className='upload-post-icon-container'><img className='upload-post-icon' style={{ height: '35px' }} src="../../public/img/upload.png" alt="upload-icon" /> <h4>drag and drop  or click to <br />upload</h4></div>
+                        <div className='upload-post-icon-container'><img className='upload-post-icon' style={{ height: '35px' }} src={UploadIcon} alt="upload-icon" /> <h4>drag and drop  or click to <br />upload</h4></div>
                         <h5>Reccomendation: Use high-quality .jpg files less than 20MB</h5>
                     </div>
                     <div>

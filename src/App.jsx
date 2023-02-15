@@ -39,7 +39,7 @@ function App() {
         <Route path='/' element={<Home allPosts={allPosts} setAllPosts={setAllPosts} filteredPosts={filteredPosts} />} />
         <Route path='/post/:id' element={<Postpage filteredPosts={filteredPosts} setFilteredPosts={setFilteredPosts}/>} />
         <Route path='/profile' element={<Profile allPosts={allPosts} setAllPosts={setAllPosts} setFilteredPosts={setFilteredPosts} />} />
-        <Route path='/user/:userId' element={<OtherUserPage setFilteredPos={setFilteredPosts} />} />
+        <Route path='/user/:userId' element={<OtherUserPage setFilteredPosts={setFilteredPosts} />} />
       </Routes>
     </div>
   )
